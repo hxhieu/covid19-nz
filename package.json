@@ -32,6 +32,9 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
+  "engines": {
+    "node": "10"
+  },
   "homepage": "https://github.com/hxhieu/covid19-nz",
   "keywords": [
     "coronavirus",
@@ -44,7 +47,8 @@
   "repository": "https://github.com/hxhieu/covid19-nz",
   "scripts": {
     "build": "webpack --env.prod",
-    "serve": "webpack-dev-server",
-    "lint": "eslint src/**/*"
+    "deploy": "yarn build && firebase deploy --only=hosting,functions",
+    "lint": "eslint src/**/*",
+    "serve": "webpack-dev-server"
   }
 }
