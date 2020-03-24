@@ -3,6 +3,18 @@
   "description": "NZ COVID-19 daily cases update, data from the Ministry of Health",
   "version": "1.0.0",
   "author": "Hugh Hoang <hugh.hoang@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/hxhieu/covid19-nz/issues",
+    "email": "hugh.hoang@gmail.com"
+  },
+  "homepage": "https://github.com/hxhieu/covid19-nz",
+  "keywords": [
+    "coronavirus",
+    "covid-19",
+    "new zealand",
+    "nz"
+  ],
   "license": "MIT",
-  "main": "index.js"
+  "main": "index.js",
+  "repository": "https://github.com/hxhieu/covid19-nz"
 }
