@@ -1,6 +1,8 @@
 const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
@@ -45,10 +47,12 @@ module.exports = (env = {}) => ({
     ],
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: '[name].css',
     }),
+    new CopyPlugin([{ from: 'public/**/*', flatten: true }]),
   ],
   devServer: {
     inline: true,
