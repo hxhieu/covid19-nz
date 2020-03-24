@@ -1,0 +1,1 @@
+NZ COVID-19 daily cases update, data from the Ministry of Health

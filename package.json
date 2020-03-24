@@ -1,0 +1,8 @@
+{
+  "name": "nz-covid19",
+  "description": "NZ COVID-19 daily cases update, data from the Ministry of Health",
+  "version": "1.0.0",
+  "author": "Hugh Hoang <hugh.hoang@gmail.com>",
+  "license": "MIT",
+  "main": "index.js"
+}
