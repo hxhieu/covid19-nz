@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { useHttpClient } from './composable/useHttpClient'
 
 const types = {
   SET_RECORDS: 'SET_RECORDS',
@@ -15,7 +16,11 @@ const mutations = {
 }
 
 const actions = {
-  setRecords: ({ commit }, records) => commit(types.SET_RECORDS, records),
+  fetchRecords: async ({ commit }) => {
+    const { get } = useHttpClient()
+    const records = await get('/cases')
+    commit(types.SET_RECORDS, records)
+  },
 }
 
 const getters = {}
