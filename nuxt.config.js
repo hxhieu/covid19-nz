@@ -49,6 +49,7 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
+    '@nuxtjs/style-resources',
   ],
   /*
    ** Axios module configuration
@@ -59,6 +60,10 @@ export default {
       process.env.NODE_ENV === 'production'
         ? 'https://asia-east2-covid-19-nz-update.cloudfunctions.net/api'
         : 'http://localhost:5001/covid-19-nz-update/asia-east2/api',
+  },
+  styleResources: {
+    // your settings here
+    scss: ['./assets/scss/*.scss'],
   },
   /*
    ** Build configuration

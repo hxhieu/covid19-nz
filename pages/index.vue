@@ -19,36 +19,34 @@
         >
           GitHub
         </a>
-        <el-button>Hello</el-button>
+        <el-button>Hello {{ confirmed.length }}</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
 import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
     Logo,
   },
-  // asyncData: async ({ req, res }) => {
-  //   await this.fetchRecords()
-  // },
+  asyncData: async ({ store }) => {
+    await store.dispatch('Cases/fetchRecords')
+  },
   computed: {
-    ...mapState('Cases', ['records']),
-  },
-  mounted: () => {
-    console.log(this)
-  },
-  methods: {
-    ...mapActions('Cases', ['fetchRecords']),
+    confirmed() {
+      return this.$store.state.Cases.records.confirmed
+    },
+    probable() {
+      return this.$store.state.Cases.records.probable
+    },
   },
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .container {
   margin: 0 auto;
   min-height: 100vh;

@@ -9,9 +9,8 @@ export const mutations = {
 }
 
 export const actions = {
-  fetchRecords: async ({ commit }) => {
-    const res = await this.$axios.$get('/cases')
-    console.log(res.data)
-    commit('setRecords', res.data)
+  async fetchRecords({ commit }) {
+    const records = await this.$axios.$get('/cases')
+    commit('setRecords', records)
   },
 }
