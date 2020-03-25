@@ -1,5 +1,9 @@
 export default {
   mode: 'spa',
+  server: {
+    port: 8080, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
   /*
    ** Headers of the page
    */
@@ -45,15 +49,13 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseUrl:
+    baseURL:
       process.env.NODE_ENV === 'production'
         ? 'https://asia-east2-covid-19-nz-update.cloudfunctions.net/api'
         : 'http://localhost:5001/covid-19-nz-update/asia-east2/api',

@@ -5,7 +5,6 @@
   "author": "Hugh Hoang &lt;hugh.hoang@gmail.com&gt;",
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
-    "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
     "babel-plugin-component": "^1.1.1",
     "element-ui": "^2.4.11",
