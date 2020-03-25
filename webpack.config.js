@@ -3,6 +3,7 @@ const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const { DefinePlugin } = require('webpack')
 
 module.exports = (env = {}) => ({
   mode: env.prod ? 'production' : 'development',
@@ -47,6 +48,11 @@ module.exports = (env = {}) => ({
     ],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env': require(`./settings/${
+        env.prod ? 'production' : 'development'
+      }.json`),
+    }),
     new CleanWebpackPlugin(),
     new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
