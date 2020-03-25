@@ -1,5 +1,22 @@
-NZ COVID-19 confirmed cases daily update
+# covid-19-nz-nuxt
 
-The data is scraped from the Ministry of Health web page https://www.health.govt.nz/our-work/diseases-and-conditions/covid-19-novel-coronavirus/covid-19-current-cases
+> NZ COVID-19 cases daily update, data from the Ministry of Health
 
-All rights reserved to the NZ Ministry of Health https://www.health.govt.nz/
+## Build Setup
+
+```bash
+# install dependencies
+$ yarn install
+
+# serve with hot reload at localhost:3000
+$ yarn dev
+
+# build for production and launch server
+$ yarn build
+$ yarn start
+
+# generate static project
+$ yarn generate
+```
+
+For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

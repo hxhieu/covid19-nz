@@ -1,56 +1,46 @@
 {
-  "name": "nz-covid19",
-  "description": "NZ COVID-19 daily cases update, data from the Ministry of Health",
+  "name": "covid-19-nz-nuxt",
+  "description": "NZ COVID-19 cases daily update, data from the Ministry of Health",
   "version": "1.0.0",
-  "author": "Hugh Hoang <hugh.hoang@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/hxhieu/covid19-nz/issues",
-    "email": "hugh.hoang@gmail.com"
-  },
+  "author": "Hugh Hoang &lt;hugh.hoang@gmail.com&gt;",
   "dependencies": {
-    "axios": "^0.19.2",
-    "element-ui": "^2.13.0",
-    "vue": "^3.0.0-alpha.9",
-    "vuex": "4.0.0-alpha.1"
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "babel-plugin-component": "^1.1.1",
+    "element-ui": "^2.4.11",
+    "nuxt": "^2.0.0"
   },
   "devDependencies": {
-    "@vue/compiler-sfc": "^3.0.0-alpha.9",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-component": "^1.1.1",
-    "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^5.1.1",
-    "css-loader": "^3.4.2",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.1",
-    "eslint-loader": "^3.0.3",
+    "@nuxtjs/eslint-config": "^2.0.0",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/style-resources": "^1.0.0",
+    "babel-eslint": "^10.0.1",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "file-loader": "^6.0.0",
-    "mini-css-extract-plugin": "^0.9.0",
-    "prettier": "^2.0.2",
-    "url-loader": "^4.0.0",
-    "vue-loader": "^16.0.0-alpha.3",
-    "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3"
+    "husky": "^4.0.0",
+    "lint-staged": "^10.0.0",
+    "node-sass": "^4.13.1",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2"
   },
-  "engines": {
-    "node": "10"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "homepage": "https://github.com/hxhieu/covid19-nz",
-  "keywords": [
-    "coronavirus",
-    "covid-19",
-    "new zealand",
-    "nz"
-  ],
-  "license": "MIT",
+  "lint-staged": {
+    "*.{js,vue}": "yarn lint"
+  },
   "main": "index.js",
-  "repository": "https://github.com/hxhieu/covid19-nz",
+  "private": true,
   "scripts": {
-    "build": "webpack --env.prod",
+    "build": "nuxt build",
     "deploy": "yarn build && firebase deploy --only=hosting,functions",
-    "lint": "eslint src/**/*",
-    "serve": "webpack-dev-server"
+    "dev": "nuxt",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "start": "nuxt start"
   }
 }
