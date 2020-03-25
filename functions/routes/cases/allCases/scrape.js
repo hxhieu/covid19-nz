@@ -8,7 +8,7 @@ const { cacheFileRaw } = require('./const')
 const parseTable = ($, selector, index) => {
   const $table = $($(selector).get(index))
   const rows = $table.find('tbody tr').toArray()
-  return rows.map((row) => {
+  return rows.map(row => {
     const cells = $(row).find('td')
     const caseNo = parseInt($(cells[0]).text())
     const location = $(cells[1]).text()
@@ -19,14 +19,14 @@ const parseTable = ($, selector, index) => {
       caseNo,
       location,
       // Fix up the age groups, where actual age was provided i.e. 64 not 60s
-      age: age !== 'Teens' && age.indexOf('0s') < 0 ? `${age[0]}0s` : age,
+      age: age !== 'Teens' && !age.includes('0s') ? `${age[0]}0s` : age,
       gender,
       details,
     }
   })
 }
 
-module.exports = function () {
+module.exports = function() {
   const data = {
     confirmed: [],
     probable: [],

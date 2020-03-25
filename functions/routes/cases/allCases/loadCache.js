@@ -5,7 +5,7 @@ const scrape = require('./scrape')
 
 const cacheFile = 'covid-19-nz-update.json'
 
-module.exports = async function () {
+module.exports = async function() {
   const cachePath = path.join(`/tmp/${cacheFile}`)
   // TODO: Refresh the cache
   if (!fs.existsSync(cachePath)) {
