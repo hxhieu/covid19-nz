@@ -1,3 +1,5 @@
+import { styles } from './plugins/element-ui'
+
 export default {
   mode: 'spa',
   server: {
@@ -27,10 +29,7 @@ export default {
   /*
    ** Global CSS
    */
-  css: [
-    './node_modules/element-ui/packages/theme-chalk/src/base.scss',
-    './node_modules/element-ui/packages/theme-chalk/src/button.scss',
-  ],
+  css: styles,
   /*
    ** Plugins to load before mounting the App
    */
