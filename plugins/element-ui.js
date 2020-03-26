@@ -1,8 +1,8 @@
 import Vue from 'vue'
-import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/en'
 
-Vue.use(ElementUI, { locale })
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+locale.use(lang)
 
 export default () => {
   Vue.component('el-button', () =>
@@ -30,16 +30,41 @@ export default () => {
       /* webpackChunkName: 'element-ui-tooltip' */ 'element-ui/lib/tooltip'
     )
   )
+  Vue.component('el-radio-group', () =>
+    import(
+      /* webpackChunkName: 'element-ui-radio-group' */ 'element-ui/lib/radio-group'
+    )
+  )
+  Vue.component('el-radio-button', () =>
+    import(
+      /* webpackChunkName: 'element-ui-radio-button' */ 'element-ui/lib/radio-button'
+    )
+  )
+  Vue.component('el-radio', () =>
+    import(/* webpackChunkName: 'element-ui-radio' */ 'element-ui/lib/radio')
+  )
+  Vue.component('el-select', () =>
+    import(/* webpackChunkName: 'element-ui-select' */ 'element-ui/lib/select')
+  )
+  Vue.component('el-option', () =>
+    import(/* webpackChunkName: 'element-ui-option' */ 'element-ui/lib/option')
+  )
 }
 
 const styles = [
   './node_modules/element-ui/packages/theme-chalk/src/base.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/display.scss',
   './node_modules/element-ui/packages/theme-chalk/src/button.scss',
   './node_modules/element-ui/packages/theme-chalk/src/table.scss',
   './node_modules/element-ui/packages/theme-chalk/src/col.scss',
   './node_modules/element-ui/packages/theme-chalk/src/row.scss',
   './node_modules/element-ui/packages/theme-chalk/src/card.scss',
   './node_modules/element-ui/packages/theme-chalk/src/tooltip.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/radio-group.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/radio-button.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/radio.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/select.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/option.scss',
 ]
 
 export { styles }

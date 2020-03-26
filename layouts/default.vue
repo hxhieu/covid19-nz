@@ -60,7 +60,11 @@ html {
 
     #content {
       max-width: 1024px;
+      padding: 20px;
       margin: 0 auto;
+      @media only screen and (max-width: $breakpoint-md) {
+        padding: 5px;
+      }
     }
   }
 }

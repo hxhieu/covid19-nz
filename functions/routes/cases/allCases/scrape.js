@@ -17,10 +17,13 @@ const parseTable = ($, selector, index) => {
     const details = $(cells[4]).text()
     return {
       caseNo,
-      location,
+      location: location.trim(),
       // Fix up the age groups, where actual age was provided i.e. 64 not 60s
-      age: age !== 'Teens' && !age.includes('0s') ? `${age[0]}0s` : age,
-      gender,
+      age: (age !== 'Teens' && age !== 'Child' && !age.includes('0s')
+        ? `${age[0]}0s`
+        : age
+      ).trim(),
+      gender: gender.trim(),
       details,
     }
   })

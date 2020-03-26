@@ -1,13 +1,18 @@
 <template>
   <div class="container">
-    <!-- <h2>Confirmed Cases</h2> -->
+    <Filters
+      icon="el-icon-map-location"
+      header="By Location"
+      :values="locationFilters"
+    ></Filters>
+    <Filters icon="el-icon-user" header="By Age" :values="ageFilters"></Filters>
     <CaseTable :records="confirmed"></CaseTable>
-    <!-- <h2>Probable Cases</h2>
-    <CaseTable :records="probable"></CaseTable> -->
   </div>
 </template>
 
 <script>
+const Filters = () =>
+  import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
 const CaseTable = () =>
   import(
     /* webpackChunkName: 'components-case-table' */ '../components/CaseTable'
@@ -16,6 +21,7 @@ const CaseTable = () =>
 export default {
   components: {
     CaseTable,
+    Filters,
   },
   asyncData: async ({ store }) => {
     await store.dispatch('Cases/fetchRecords')
@@ -26,6 +32,12 @@ export default {
     },
     probable() {
       return this.$store.state.Cases.records.probable
+    },
+    locationFilters() {
+      return this.confirmed.map(x => x.location)
+    },
+    ageFilters() {
+      return this.confirmed.map(x => x.age)
     },
   },
 }
