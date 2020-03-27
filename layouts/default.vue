@@ -1,6 +1,6 @@
 <template>
   <div id="main-container">
-    <h1 class="header">
+    <h1 id="main-header">
       <nuxt-link to="/"><i class="el-icon-notebook-2"></i></nuxt-link>
       <nuxt-link class="header-text" to="/">COVID-19 NZ Update</nuxt-link>
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
@@ -11,8 +11,7 @@
 
 <style lang="scss">
 html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
@@ -44,7 +43,7 @@ html {
       padding: 10px;
     }
 
-    .header {
+    #main-header {
       padding: 20px;
       display: flex;
       justify-content: space-between;
@@ -60,7 +59,7 @@ html {
 
     #content {
       max-width: 1024px;
-      padding: 20px;
+      padding: 0 20px 20px 20px;
       margin: 0 auto;
       @media only screen and (max-width: $breakpoint-md) {
         padding: 5px;
