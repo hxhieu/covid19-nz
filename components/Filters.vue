@@ -94,7 +94,7 @@ export default {
   },
   watch: {
     filter(val) {
-      this.$emit('input', this.filter === this.allKey ? null : this.filter)
+      this.$emit('input', this.filter)
     },
     value: {
       handler(val) {
@@ -148,7 +148,7 @@ export default {
     .filter-info {
       .filter-count {
         @include count-badge;
-        padding: 0 6px;
+        padding: 0 10px;
         font-size: 0.8em;
         margin-left: 6px;
       }
@@ -156,7 +156,7 @@ export default {
   }
 
   .filters {
-    padding: 0 20px;
+    padding: 0 20px 10px 20px;
   }
 
   [role='radio'] {

@@ -16,7 +16,7 @@
     ></Filters>
     <Filters
       v-model="filterGender"
-      icon="el-icon-male"
+      icon="el-icon-s-data"
       header="By Gender"
       :values="genderFilters"
       :button-width="filterButtonWidth"
@@ -64,9 +64,6 @@ export default {
           (this.filterGender ? x.gender === this.filterGender : true)
       )
     },
-    allLocations() {
-      return this.confirmed.map(x => x.location)
-    },
     locationFilters() {
       return this.confirmedFiltered.map(x => x.location)
     },
@@ -76,6 +73,50 @@ export default {
     genderFilters() {
       return this.confirmedFiltered.map(x => x.gender)
     },
+  },
+  watch: {
+    filterLoc(val, oldVal) {
+      if (val === oldVal) return
+      const valid = this.confirmed.map(x => x.location).includes(val)
+      this.$router.push({
+        query: {
+          location: valid ? val : null,
+          age: this.filterAge,
+          gender: this.filterGender,
+        },
+      })
+      this.filterLoc = valid ? val : null
+    },
+    filterAge(val, oldVal) {
+      if (val === oldVal) return
+      const valid = this.confirmed.map(x => x.age).includes(val)
+      this.$router.push({
+        query: {
+          age: valid ? val : null,
+          location: this.filterLoc,
+          gender: this.filterGender,
+        },
+      })
+      this.filterAge = valid ? val : null
+    },
+    filterGender(val, oldVal) {
+      if (val === oldVal) return
+      const valid = this.confirmed.map(x => x.gender).includes(val)
+      this.$router.push({
+        query: {
+          gender: valid ? val : null,
+          location: this.filterLoc,
+          age: this.filterAge,
+        },
+      })
+      this.filterGender = valid ? val : null
+    },
+  },
+  created() {
+    const { location, age, gender } = this.$route.query
+    this.filterLoc = location
+    this.filterAge = age
+    this.filterGender = gender
   },
 }
 </script>

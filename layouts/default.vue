@@ -5,7 +5,7 @@
       <nuxt-link class="header-text" to="/">COVID-19 NZ Update</nuxt-link>
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
     </h1>
-    <nuxt id="content" />
+    <nuxt id="main-content" />
   </div>
 </template>
 
@@ -57,7 +57,7 @@ html {
       }
     }
 
-    #content {
+    #main-content {
       max-width: 1024px;
       padding: 0 20px 20px 20px;
       margin: 0 auto;
