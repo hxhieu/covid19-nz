@@ -97,59 +97,55 @@ export default {
   watch: {
     filterLoc(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.allCases.map(x => x.location).includes(val)
       this.$router.push({
         query: {
-          location: valid ? val : null,
+          location: val,
           age: this.filterAge,
           gender: this.filterGender,
+          date: this.filterDate,
         },
       })
-      this.filterLoc = valid ? val : null
     },
     filterAge(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.allCases.map(x => x.age).includes(val)
       this.$router.push({
         query: {
-          age: valid ? val : null,
+          age: val,
           location: this.filterLoc,
           gender: this.filterGender,
+          date: this.filterDate,
         },
       })
-      this.filterAge = valid ? val : null
     },
     filterGender(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.allCases.map(x => x.gender).includes(val)
       this.$router.push({
         query: {
-          gender: valid ? val : null,
+          gender: val,
           location: this.filterLoc,
           age: this.filterAge,
+          date: this.filterDate,
         },
       })
-      this.filterGender = valid ? val : null
     },
     filterDate(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.allCases.map(x => x.date).includes(val)
       this.$router.push({
         query: {
-          date: valid ? val : null,
+          date: val,
           gender: this.filterGender,
           location: this.filterLoc,
           age: this.filterAge,
         },
       })
-      this.filterDate = valid ? val : null
     },
   },
   created() {
-    const { location, age, gender } = this.$route.query
+    const { date, location, age, gender } = this.$route.query
     this.filterLoc = location
     this.filterAge = age
     this.filterGender = gender
+    this.filterDate = date
     // Initial data
     this.fetchCases()
   },

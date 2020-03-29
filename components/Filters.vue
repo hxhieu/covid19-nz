@@ -31,6 +31,12 @@
       </el-radio-group>
     </transition>
   </div>
+  <!-- <span v-else class="filter-info">
+    {{ filter === allKey ? `${allKey} ${header}` : filter }}
+    <span class="filter-count">
+      {{ filters[filter] }}
+    </span>
+  </span> -->
 </template>
 
 <script>
