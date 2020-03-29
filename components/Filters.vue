@@ -4,15 +4,17 @@
       <span>
         <i :class="allIcon"></i>
         <span class="filter-info">
-          {{ filter }}
+          {{ filter === allKey ? `${allKey} ${header}` : filter }}
           <span class="filter-count">
             {{ filters[filter] }}
           </span>
         </span>
       </span>
-      <i
-        :class="showFilters ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"
-      ></i>
+      <span>
+        <i
+          :class="showFilters ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"
+        ></i>
+      </span>
     </h3>
     <transition name="filter-list">
       <el-radio-group v-if="showFilters" v-model="filter" class="filters">
@@ -78,9 +80,7 @@ export default {
       const result = {
         All: this.values.length,
       }
-      const sorted = [...this.values].sort()
-
-      sorted.forEach(val => {
+      this.values.forEach(val => {
         result[val] = (result[val] || 0) + 1
       })
       return result
@@ -93,7 +93,8 @@ export default {
     },
   },
   watch: {
-    filter(val) {
+    filter(val, oldVal) {
+      if (val !== this.allKey && val !== oldVal) this.showFilters = false
       this.$emit('input', this.filter)
     },
     value: {

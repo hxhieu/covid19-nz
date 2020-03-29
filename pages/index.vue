@@ -1,27 +1,34 @@
 <template>
   <div class="container">
     <Filters
+      v-model="filterDate"
+      icon="el-icon-date"
+      header="Dates"
+      :values="dateFilters"
+      :button-width="filterButtonWidth"
+    ></Filters>
+    <Filters
       v-model="filterLoc"
       icon="el-icon-map-location"
-      header="By Location"
+      header="DHBs"
       :values="locationFilters"
       :button-width="filterButtonWidth"
     ></Filters>
     <Filters
       v-model="filterAge"
       icon="el-icon-user"
-      header="By Age"
+      header="Ages"
       :values="ageFilters"
       :button-width="filterButtonWidth"
     ></Filters>
     <Filters
       v-model="filterGender"
       icon="el-icon-s-data"
-      header="By Gender"
+      header="Gender"
       :values="genderFilters"
       :button-width="filterButtonWidth"
     ></Filters>
-    <CaseTable :records="confirmedFiltered"></CaseTable>
+    <CaseTable v-if="showSummary" :records="casesFiltered"></CaseTable>
   </div>
 </template>
 
@@ -47,37 +54,64 @@ export default {
       filterLoc: null,
       filterAge: null,
       filterGender: null,
+      filterDate: null,
     }
   },
   computed: {
-    confirmed() {
-      return this.$store.state.Cases.records.confirmed
+    casesAll() {
+      const { confirmed, probable } = this.$store.state.Cases.records
+      return confirmed
+        .map(x => ({
+          ...x,
+          confirmed: true,
+        }))
+        .concat(
+          probable.map(x => ({
+            ...x,
+            confirmed: false,
+          }))
+        )
     },
-    probable() {
-      return this.$store.state.Cases.records.probable
-    },
-    confirmedFiltered() {
-      return this.confirmed.filter(
+    casesFiltered() {
+      return this.casesAll.filter(
         x =>
           (this.filterLoc ? x.location === this.filterLoc : true) &&
           (this.filterAge ? x.age === this.filterAge : true) &&
-          (this.filterGender ? x.gender === this.filterGender : true)
+          (this.filterGender ? x.gender === this.filterGender : true) &&
+          (this.filterDate ? x.date === this.filterDate : true)
       )
     },
     locationFilters() {
-      return this.confirmedFiltered.map(x => x.location)
+      return this.casesFiltered.map(x => x.location).sort()
     },
     ageFilters() {
-      return this.confirmedFiltered.map(x => x.age)
+      return this.casesFiltered.map(x => x.age).sort()
     },
     genderFilters() {
-      return this.confirmedFiltered.map(x => x.gender)
+      return this.casesFiltered.map(x => x.gender).sort()
+    },
+    dateFilters() {
+      return this.casesFiltered
+        .map(x => x.date)
+        .sort((x, y) => {
+          const date1parts = x.split('-')
+          const date1 = new Date(date1parts[2], date1parts[1], date1parts[0])
+          const date2parts = y.split('-')
+          const date2 = new Date(date2parts[2], date2parts[1], date2parts[0])
+          if (date1 === date2) return 0
+          return date1 < date2 ? 1 : -1
+        })
+    },
+    showSummary() {
+      return (
+        this.filterLoc || this.filterAge || this.filterGender || this.filterDate
+      )
     },
   },
   watch: {
     filterLoc(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.confirmed.map(x => x.location).includes(val)
+      const valid = this.casesAll.map(x => x.location).includes(val)
       this.$router.push({
         query: {
           location: valid ? val : null,
@@ -89,7 +123,7 @@ export default {
     },
     filterAge(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.confirmed.map(x => x.age).includes(val)
+      const valid = this.casesAll.map(x => x.age).includes(val)
       this.$router.push({
         query: {
           age: valid ? val : null,
@@ -101,7 +135,7 @@ export default {
     },
     filterGender(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.confirmed.map(x => x.gender).includes(val)
+      const valid = this.casesAll.map(x => x.gender).includes(val)
       this.$router.push({
         query: {
           gender: valid ? val : null,
@@ -110,6 +144,19 @@ export default {
         },
       })
       this.filterGender = valid ? val : null
+    },
+    filterDate(val, oldVal) {
+      if (val === oldVal) return
+      const valid = this.casesAll.map(x => x.date).includes(val)
+      this.$router.push({
+        query: {
+          date: valid ? val : null,
+          gender: this.filterGender,
+          location: this.filterLoc,
+          age: this.filterAge,
+        },
+      })
+      this.filterDate = valid ? val : null
     },
   },
   created() {

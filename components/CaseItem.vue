@@ -1,23 +1,22 @@
 <template>
   <el-card class="case-item">
     <el-row>
-      <el-col :md="2" class="number">
-        <i class="el-icon-copy-document"></i>
-        {{ item.caseNo }}
+      <el-col :md="4" :xs="8" :sm="8" class="date">
+        <i class="el-icon-date"></i>
+        {{ item.date }}
       </el-col>
-      <el-col :md="5" class="location">
+      <el-col :md="5" :xs="8" :sm="8" class="location">
         <i class="el-icon-map-location"></i>
-        <a href="#">{{ item.location }}</a>
+        {{ item.location }}
       </el-col>
-      <el-col :md="3" class="age-group">
+      <el-col :md="4" :xs="8" :sm="8" class="age-group">
         <i class="el-icon-user"></i>
-        <a href="#">{{ item.age }}</a>
-        <a href="#">
-          <i v-if="item.gender === 'M'" class="el-icon-male"></i>
-          <i v-else class="el-icon-female"></i>
-        </a>
+        {{ item.age }}
+        <i v-if="item.gender === 'Male'" class="el-icon-male"></i>
+        <i v-if="item.gender === 'Female'" class="el-icon-female"></i>
+        <i v-if="item.gender === 'Unknown'" class="el-icon-question"></i>
       </el-col>
-      <el-col :md="14" class="details">
+      <el-col :md="10" class="details">
         <el-tooltip effect="dark" :content="item.details" placement="top">
           <i class="el-icon-info"></i>
         </el-tooltip>
