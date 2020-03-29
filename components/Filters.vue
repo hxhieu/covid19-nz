@@ -101,7 +101,7 @@ export default {
   watch: {
     filter(val, oldVal) {
       if (val !== this.allKey && val !== oldVal) this.showFilters = false
-      this.$emit('input', this.filter)
+      this.$emit('input', this.filter === this.allKey ? null : this.filter)
     },
     value: {
       handler(val) {
