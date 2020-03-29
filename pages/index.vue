@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 const Filters = () =>
   import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
 const CaseTable = () =>
@@ -45,9 +47,6 @@ export default {
     CaseTable,
     Filters,
   },
-  asyncData: async ({ store }) => {
-    await store.dispatch('Cases/fetchRecords')
-  },
   data() {
     return {
       filterButtonWidth: 220,
@@ -58,22 +57,9 @@ export default {
     }
   },
   computed: {
-    casesAll() {
-      const { confirmed, probable } = this.$store.state.Cases.records
-      return confirmed
-        .map(x => ({
-          ...x,
-          confirmed: true,
-        }))
-        .concat(
-          probable.map(x => ({
-            ...x,
-            confirmed: false,
-          }))
-        )
-    },
+    ...mapGetters('Cases', ['allCases']),
     casesFiltered() {
-      return this.casesAll.filter(
+      return this.allCases.filter(
         x =>
           (this.filterLoc ? x.location === this.filterLoc : true) &&
           (this.filterAge ? x.age === this.filterAge : true) &&
@@ -111,7 +97,7 @@ export default {
   watch: {
     filterLoc(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.location).includes(val)
+      const valid = this.allCases.map(x => x.location).includes(val)
       this.$router.push({
         query: {
           location: valid ? val : null,
@@ -123,7 +109,7 @@ export default {
     },
     filterAge(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.age).includes(val)
+      const valid = this.allCases.map(x => x.age).includes(val)
       this.$router.push({
         query: {
           age: valid ? val : null,
@@ -135,7 +121,7 @@ export default {
     },
     filterGender(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.gender).includes(val)
+      const valid = this.allCases.map(x => x.gender).includes(val)
       this.$router.push({
         query: {
           gender: valid ? val : null,
@@ -147,7 +133,7 @@ export default {
     },
     filterDate(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.date).includes(val)
+      const valid = this.allCases.map(x => x.date).includes(val)
       this.$router.push({
         query: {
           date: valid ? val : null,
@@ -164,6 +150,13 @@ export default {
     this.filterLoc = location
     this.filterAge = age
     this.filterGender = gender
+    // Initial data
+    this.fetchCases()
+  },
+  methods: {
+    ...mapActions('Cases', {
+      fetchCases: 'fetchRecords',
+    }),
   },
 }
 </script>

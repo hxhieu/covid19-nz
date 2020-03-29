@@ -1,5 +1,8 @@
 export const state = () => ({
-  records: [],
+  records: {
+    confirmed: [],
+    probable: [],
+  },
 })
 
 export const mutations = {
@@ -13,4 +16,18 @@ export const actions = {
     const records = await this.$axios.$get('/cases')
     commit('setRecords', records)
   },
+}
+export const getters = {
+  allCases: state =>
+    state.records.confirmed
+      .map(x => ({
+        ...x,
+        confirmed: true,
+      }))
+      .concat(
+        state.records.probable.map(x => ({
+          ...x,
+          confirmed: false,
+        }))
+      ),
 }
