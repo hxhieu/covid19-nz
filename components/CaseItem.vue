@@ -16,7 +16,7 @@
         <i v-if="item.gender === 'Female'" class="el-icon-female"></i>
         <i v-if="item.gender === 'Unknown'" class="el-icon-question"></i>
       </el-col>
-      <el-col :md="10" class="details">
+      <el-col :md="11" class="details">
         <el-tooltip effect="dark" :content="item.details" placement="top">
           <i class="el-icon-info"></i>
         </el-tooltip>
