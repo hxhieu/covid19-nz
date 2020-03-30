@@ -1,38 +1,56 @@
 <template>
   <div class="container">
-    <Filters
-      v-model="filterDate"
-      icon="el-icon-date"
-      header="Dates"
-      :values="dateFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterLoc"
-      icon="el-icon-map-location"
-      header="DHBs"
-      :values="locationFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterAge"
-      icon="el-icon-user"
-      header="Ages"
-      :values="ageFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterGender"
-      icon="el-icon-s-data"
-      header="Gender"
-      :values="genderFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <CaseTable v-if="showSummary" :records="casesFiltered"></CaseTable>
+    <el-row class="filters" :gutter="10">
+      <el-col :md="8">
+        <Filters
+          v-model="filterLoc"
+          icon="el-icon-map-location"
+          header="DHBs"
+          :values="locationFilters"
+          :button-width="220"
+        ></Filters>
+      </el-col>
+      <el-col :md="4">
+        <Filters
+          v-model="filterAge"
+          icon="el-icon-user"
+          header="Ages"
+          :values="ageFilters"
+          :button-width="150"
+        ></Filters>
+      </el-col>
+      <el-col :md="4">
+        <Filters
+          v-model="filterGender"
+          icon="el-icon-s-data"
+          header="Gender"
+          :values="genderFilters"
+          :button-width="140"
+        ></Filters>
+      </el-col>
+      <el-col :md="5">
+        <Filters
+          v-model="filterDate"
+          icon="el-icon-date"
+          header="Dates"
+          :values="dateFilters"
+          :button-width="170"
+        ></Filters>
+      </el-col>
+      <el-col :md="3">
+        <span class="total">
+          <label class="hidden-md-and-up">Total:&nbsp;</label>
+          {{ filtered.length }}
+        </span>
+      </el-col>
+    </el-row>
+    <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 const Filters = () =>
   import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
 const CaseTable = () =>
@@ -45,12 +63,8 @@ export default {
     CaseTable,
     Filters,
   },
-  asyncData: async ({ store }) => {
-    await store.dispatch('Cases/fetchRecords')
-  },
   data() {
     return {
-      filterButtonWidth: 220,
       filterLoc: null,
       filterAge: null,
       filterGender: null,
@@ -58,40 +72,26 @@ export default {
     }
   },
   computed: {
-    casesAll() {
-      const { confirmed, probable } = this.$store.state.Cases.records
-      return confirmed
-        .map(x => ({
-          ...x,
-          confirmed: true,
-        }))
-        .concat(
-          probable.map(x => ({
-            ...x,
-            confirmed: false,
-          }))
-        )
-    },
-    casesFiltered() {
-      return this.casesAll.filter(
-        x =>
-          (this.filterLoc ? x.location === this.filterLoc : true) &&
-          (this.filterAge ? x.age === this.filterAge : true) &&
-          (this.filterGender ? x.gender === this.filterGender : true) &&
-          (this.filterDate ? x.date === this.filterDate : true)
-      )
+    ...mapGetters('Cases', ['allCases', 'filteredCases']),
+    filtered() {
+      return this.filteredCases({
+        age: this.filterAge,
+        date: this.filterDate,
+        gender: this.filterGender,
+        location: this.filterLoc,
+      })
     },
     locationFilters() {
-      return this.casesFiltered.map(x => x.location).sort()
+      return this.filtered.map(x => x.location).sort()
     },
     ageFilters() {
-      return this.casesFiltered.map(x => x.age).sort()
+      return this.filtered.map(x => x.age).sort()
     },
     genderFilters() {
-      return this.casesFiltered.map(x => x.gender).sort()
+      return this.filtered.map(x => x.gender).sort()
     },
     dateFilters() {
-      return this.casesFiltered
+      return this.filtered
         .map(x => x.date)
         .sort((x, y) => {
           const date1parts = x.split('-')
@@ -111,61 +111,78 @@ export default {
   watch: {
     filterLoc(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.location).includes(val)
       this.$router.push({
         query: {
-          location: valid ? val : null,
+          location: val,
           age: this.filterAge,
           gender: this.filterGender,
+          date: this.filterDate,
         },
       })
-      this.filterLoc = valid ? val : null
     },
     filterAge(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.age).includes(val)
       this.$router.push({
         query: {
-          age: valid ? val : null,
+          age: val,
           location: this.filterLoc,
           gender: this.filterGender,
+          date: this.filterDate,
         },
       })
-      this.filterAge = valid ? val : null
     },
     filterGender(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.gender).includes(val)
       this.$router.push({
         query: {
-          gender: valid ? val : null,
+          gender: val,
           location: this.filterLoc,
           age: this.filterAge,
+          date: this.filterDate,
         },
       })
-      this.filterGender = valid ? val : null
     },
     filterDate(val, oldVal) {
       if (val === oldVal) return
-      const valid = this.casesAll.map(x => x.date).includes(val)
       this.$router.push({
         query: {
-          date: valid ? val : null,
+          date: val,
           gender: this.filterGender,
           location: this.filterLoc,
           age: this.filterAge,
         },
       })
-      this.filterDate = valid ? val : null
     },
   },
   created() {
-    const { location, age, gender } = this.$route.query
+    const { date, location, age, gender } = this.$route.query
     this.filterLoc = location
     this.filterAge = age
     this.filterGender = gender
+    this.filterDate = date
+    // Initial data
+    this.fetchCases()
+  },
+  methods: {
+    ...mapActions('Cases', {
+      fetchCases: 'fetchRecords',
+    }),
   },
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.filters {
+  .total {
+    display: flex;
+    background: $primaryColor;
+    color: #fff;
+    padding: 11px 0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+}
+</style>

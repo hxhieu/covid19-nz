@@ -49,6 +49,9 @@ export default () => {
   Vue.component('el-option', () =>
     import(/* webpackChunkName: 'element-ui-option' */ 'element-ui/lib/option')
   )
+  Vue.component('el-dialog', () =>
+    import(/* webpackChunkName: 'element-ui-dialog' */ 'element-ui/lib/dialog')
+  )
 }
 
 const styles = [
@@ -65,6 +68,7 @@ const styles = [
   './node_modules/element-ui/packages/theme-chalk/src/radio.scss',
   './node_modules/element-ui/packages/theme-chalk/src/select.scss',
   './node_modules/element-ui/packages/theme-chalk/src/option.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/dialog.scss',
 ]
 
 export { styles }

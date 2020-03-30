@@ -1,23 +1,24 @@
 <template>
-  <div class="filters-container">
-    <h3 class="header" @click="showFilters = !showFilters">
-      <span>
-        <i :class="allIcon"></i>
-        <span class="filter-info">
-          {{ filter === allKey ? `${allKey} ${header}` : filter }}
-          <span class="filter-count">
-            {{ filters[filter] }}
-          </span>
-        </span>
+  <div class="filter-wrapper">
+    <span
+      class="filter-badge"
+      :class="{ 'has-filter': filter !== allKey }"
+      @click="setFilter"
+    >
+      <i :class="allIcon" class="icon"></i>
+      <span class="value">
+        {{ filter === allKey ? `${allKey} ${header}` : filter }}
       </span>
-      <span>
-        <i
-          :class="showFilters ? 'el-icon-caret-top' : 'el-icon-caret-bottom'"
-        ></i>
-      </span>
-    </h3>
-    <transition name="filter-list">
-      <el-radio-group v-if="showFilters" v-model="filter" class="filters">
+      <i v-if="filter !== allKey" class="el-icon-close"></i>
+      <i v-else class="el-icon-plus"></i>
+    </span>
+    <el-dialog
+      class="filters-container"
+      :visible.sync="showDialog"
+      fullscreen
+      :title="header"
+    >
+      <el-radio-group v-model="filter" class="filters">
         <el-radio
           v-for="(val, key) in filters"
           :key="key"
@@ -29,7 +30,7 @@
           <span v-if="key !== allKey" class="count">{{ val }}</span>
         </el-radio>
       </el-radio-group>
-    </transition>
+    </el-dialog>
   </div>
 </template>
 
@@ -72,14 +73,12 @@ export default {
     return {
       allKey,
       filter: allKey,
-      showFilters: false,
+      showDialog: false,
     }
   },
   computed: {
     filters() {
-      const result = {
-        All: this.values.length,
-      }
+      const result = {}
       this.values.forEach(val => {
         result[val] = (result[val] || 0) + 1
       })
@@ -94,14 +93,23 @@ export default {
   },
   watch: {
     filter(val, oldVal) {
-      if (val !== this.allKey && val !== oldVal) this.showFilters = false
-      this.$emit('input', this.filter)
+      this.$emit('input', this.filter === this.allKey ? null : this.filter)
+      this.showDialog = false
     },
     value: {
       handler(val) {
         this.filter = val || this.allKey
       },
       immediate: true,
+    },
+  },
+  methods: {
+    setFilter() {
+      if (this.filter === this.allKey) {
+        this.showDialog = true
+      } else {
+        this.filter = this.allKey
+      }
     },
   },
 }
@@ -117,82 +125,71 @@ export default {
   font-weight: 700;
 }
 
-.filter-list-enter,
-.filter-list-leave-to {
-  visibility: hidden;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  opacity: 0;
-}
-
-.filter-list-enter-active {
-  transition: all 1s;
-}
-
-.filters-container {
-  border: 1px solid #eee;
+.filter-wrapper {
   margin-bottom: 10px;
-  border-radius: 4px;
-
-  .header {
+  .filter-badge {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    color: $primaryColor;
+    border: 1px solid $primaryColor;
+    padding: 10px;
     cursor: pointer;
-    font-weight: 300;
-    padding: 10px 20px;
-    i {
-      color: $primaryColor;
+
+    &:hover {
+      background: $primaryColor;
+      color: #fff;
     }
 
-    .filter-info {
-      .filter-count {
-        @include count-badge;
-        padding: 0 10px;
-        font-size: 0.8em;
-        margin-left: 6px;
-      }
+    &.has-filter {
+      font-weight: 700;
+      background: $primaryColor;
+      color: #fff;
     }
   }
 
-  .filters {
-    padding: 0 20px 10px 20px;
-  }
-
-  [role='radio'] {
-    margin: 0 0 5px 5px !important;
-    .el-radio__label {
-      display: inline-block;
-      position: relative;
-      .count {
-        @include count-badge;
-        padding: 2px 6px;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-      }
+  .filters-container {
+    .el-dialog__body {
+      padding: 0;
     }
 
-    &.is-active {
-      .count {
-        background: #fff;
-        color: $primaryColor;
-      }
-    }
+    .filters {
+      [role='radio'] {
+        margin: 0 0 5px 5px !important;
+        .el-radio__label {
+          display: inline-block;
+          position: relative;
+          .count {
+            @include count-badge;
+            padding: 2px 6px;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+          }
+        }
 
-    .item-text {
-      display: inline-block;
-      & > div {
-        padding-right: 10px;
-        display: flex;
-        justify-content: space-between;
-      }
-    }
+        &.is-active {
+          .count {
+            background: #fff;
+            color: $primaryColor;
+          }
+        }
 
-    @media only screen and (max-width: $breakpoint-md) {
-      margin: 0 0 5px 0 !important;
-      width: 100% !important;
+        .item-text {
+          display: inline-block;
+          & > div {
+            padding-right: 10px;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+
+        @media only screen and (max-width: $breakpoint-md) {
+          margin: 0 0 5px 0 !important;
+          width: 100% !important;
+        }
+      }
     }
   }
 }
