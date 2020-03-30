@@ -1,33 +1,49 @@
 <template>
   <div class="container">
-    <Filters
-      v-model="filterDate"
-      icon="el-icon-date"
-      header="Dates"
-      :values="dateFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterLoc"
-      icon="el-icon-map-location"
-      header="DHBs"
-      :values="locationFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterAge"
-      icon="el-icon-user"
-      header="Ages"
-      :values="ageFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
-    <Filters
-      v-model="filterGender"
-      icon="el-icon-s-data"
-      header="Gender"
-      :values="genderFilters"
-      :button-width="filterButtonWidth"
-    ></Filters>
+    <el-row class="filters" :gutter="10">
+      <el-col :md="8">
+        <Filters
+          v-model="filterLoc"
+          icon="el-icon-map-location"
+          header="DHBs"
+          :values="locationFilters"
+          :button-width="220"
+        ></Filters>
+      </el-col>
+      <el-col :md="4">
+        <Filters
+          v-model="filterAge"
+          icon="el-icon-user"
+          header="Ages"
+          :values="ageFilters"
+          :button-width="150"
+        ></Filters>
+      </el-col>
+      <el-col :md="4">
+        <Filters
+          v-model="filterGender"
+          icon="el-icon-s-data"
+          header="Gender"
+          :values="genderFilters"
+          :button-width="140"
+        ></Filters>
+      </el-col>
+      <el-col :md="5">
+        <Filters
+          v-model="filterDate"
+          icon="el-icon-date"
+          header="Dates"
+          :values="dateFilters"
+          :button-width="170"
+        ></Filters>
+      </el-col>
+      <el-col :md="3">
+        <span class="total">
+          <label class="hidden-md-and-up">Total:&nbsp;</label>
+          {{ filtered.length }}
+        </span>
+      </el-col>
+    </el-row>
     <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
   </div>
 </template>
@@ -49,7 +65,6 @@ export default {
   },
   data() {
     return {
-      filterButtonWidth: 220,
       filterLoc: null,
       filterAge: null,
       filterGender: null,
@@ -156,4 +171,18 @@ export default {
 }
 </script>
 
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.filters {
+  .total {
+    display: flex;
+    background: $primaryColor;
+    color: #fff;
+    padding: 11px 0;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+  }
+}
+</style>

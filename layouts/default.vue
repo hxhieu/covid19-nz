@@ -1,8 +1,10 @@
 <template>
   <div id="main-container">
     <h1 id="main-header">
-      <nuxt-link to="/"><i class="el-icon-notebook-2"></i></nuxt-link>
-      <nuxt-link class="header-text" to="/">COVID-19 NZ Update</nuxt-link>
+      <nuxt-link to="/"><i class="el-icon-s-grid"></i></nuxt-link>
+      <nuxt-link class="header-text" to="/">
+        COVID-19 NZ Update
+      </nuxt-link>
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
     </h1>
     <nuxt id="main-content" />
