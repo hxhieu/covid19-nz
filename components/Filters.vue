@@ -150,12 +150,13 @@ export default {
   }
 
   .filters-container {
-    .el-dialog__body {
-      padding: 0;
-    }
+    text-align: center;
 
     .filters {
+      max-width: 1024px;
+      margin: -20px auto 0 auto;
       [role='radio'] {
+        text-align: initial;
         margin: 0 0 5px 5px !important;
         .el-radio__label {
           display: inline-block;
