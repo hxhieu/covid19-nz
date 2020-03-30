@@ -28,7 +28,7 @@
       :values="genderFilters"
       :button-width="filterButtonWidth"
     ></Filters>
-    <CaseTable v-if="showSummary" :records="casesFiltered"></CaseTable>
+    <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
   </div>
 </template>
 
@@ -57,27 +57,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Cases', ['allCases']),
-    casesFiltered() {
-      return this.allCases.filter(
-        x =>
-          (this.filterLoc ? x.location === this.filterLoc : true) &&
-          (this.filterAge ? x.age === this.filterAge : true) &&
-          (this.filterGender ? x.gender === this.filterGender : true) &&
-          (this.filterDate ? x.date === this.filterDate : true)
-      )
+    ...mapGetters('Cases', ['allCases', 'filteredCases']),
+    filtered() {
+      return this.filteredCases({
+        age: this.filterAge,
+        date: this.filterDate,
+        gender: this.filterGender,
+        location: this.filterLoc,
+      })
     },
     locationFilters() {
-      return this.casesFiltered.map(x => x.location).sort()
+      return this.filtered.map(x => x.location).sort()
     },
     ageFilters() {
-      return this.casesFiltered.map(x => x.age).sort()
+      return this.filtered.map(x => x.age).sort()
     },
     genderFilters() {
-      return this.casesFiltered.map(x => x.gender).sort()
+      return this.filtered.map(x => x.gender).sort()
     },
     dateFilters() {
-      return this.casesFiltered
+      return this.filtered
         .map(x => x.date)
         .sort((x, y) => {
           const date1parts = x.split('-')

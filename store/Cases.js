@@ -17,17 +17,29 @@ export const actions = {
     commit('setRecords', records)
   },
 }
-export const getters = {
-  allCases: state =>
-    state.records.confirmed
-      .map(x => ({
+
+const getAllCases = state =>
+  state.records.confirmed
+    .map(x => ({
+      ...x,
+      confirmed: true,
+    }))
+    .concat(
+      state.records.probable.map(x => ({
         ...x,
-        confirmed: true,
+        confirmed: false,
       }))
-      .concat(
-        state.records.probable.map(x => ({
-          ...x,
-          confirmed: false,
-        }))
-      ),
+    )
+
+export const getters = {
+  allCases: state => getAllCases(state),
+  filteredCases: state => ({ age, location, date, gender }) => {
+    return getAllCases(state).filter(
+      x =>
+        (location ? x.location === location : true) &&
+        (age ? x.age === age : true) &&
+        (gender ? x.gender === gender : true) &&
+        (date ? x.date === date : true)
+    )
+  },
 }
