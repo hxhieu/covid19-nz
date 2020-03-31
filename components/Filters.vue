@@ -129,7 +129,6 @@ export default {
 }
 
 .filter-wrapper {
-  margin-bottom: 10px;
   .filter-badge {
     display: flex;
     align-items: center;

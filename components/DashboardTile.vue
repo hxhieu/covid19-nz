@@ -66,6 +66,7 @@ export default {
   width: 50%;
   padding: 5px;
   position: relative;
+  cursor: pointer;
 
   .loading {
     font-size: 4rem;

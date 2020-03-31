@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 const DashboardTile = () =>
   import(
     /* webpackChunkName: 'components-dashboard-tile' */ '../components/DashboardTile'
@@ -46,6 +48,12 @@ export default {
     this.$nextTick(() => {
       this.$nuxt.$loading.start()
     })
+  },
+  created() {
+    this.fetchCases()
+  },
+  methods: {
+    ...mapActions('Cases', ['fetchCases']),
   },
 }
 </script>

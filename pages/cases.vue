@@ -51,14 +51,18 @@
       cases across New Zealand. Use the filters above to find out more!
     </label>
     <div v-if="showSummary">
-      <CaseActions></CaseActions>
-      <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
+      <CaseActions @save="saveToDashboard"></CaseActions>
+      <CaseTable
+        v-if="showSummary"
+        :records="filtered"
+        class="summary"
+      ></CaseTable>
     </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 const Filters = () =>
   import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
@@ -183,9 +187,22 @@ export default {
     })
   },
   methods: {
-    ...mapActions('Cases', {
-      fetchCases: 'fetchRecords',
-    }),
+    ...mapActions('Cases', ['fetchCases']),
+    ...mapMutations('Dashboard', ['setTile']),
+    saveToDashboard(index) {
+      this.setTile({
+        index,
+        filters: {
+          age: this.filterAge,
+          location: this.filterLoc,
+          gender: this.filterGender,
+          date: this.filterDate,
+        },
+      })
+      this.$nextTick(() => {
+        this.$router.push('/')
+      })
+    },
   },
 }
 </script>
@@ -202,11 +219,17 @@ export default {
     background: $primaryColor;
     color: #fff;
     padding: 9px 0;
-    margin-bottom: 10px;
     border-radius: 4px;
     align-items: center;
     justify-content: center;
     font-weight: 700;
   }
+}
+
+.filter-wrapper {
+  margin-bottom: 5px;
+}
+.summary {
+  margin-top: 5px;
 }
 </style>
