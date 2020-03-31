@@ -7,24 +7,28 @@
         bg-img="img/nz-11.png"
         bg-position="bottom right"
         :tile="tile11"
+        :busy="fetchBusy"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
         bg-img="img/nz-12.png"
         bg-position="bottom left"
         :tile="tile12"
+        :busy="fetchBusy"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
         bg-img="img/nz-21.png"
         bg-position="top right"
         :tile="tile21"
+        :busy="fetchBusy"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
         bg-img="img/nz-22.png"
         bg-position="top left"
         :tile="tile22"
+        :busy="fetchBusy"
       ></DashboardTile>
     </div>
   </div>
@@ -32,6 +36,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import fetchCasesPageMixin from '@/mixins/fetch-cases-page'
 
 const DashboardTile = () =>
   import(
@@ -42,6 +47,7 @@ export default {
   components: {
     DashboardTile,
   },
+  mixins: [fetchCasesPageMixin],
   data() {
     return {
       emptyIcon: 'el-icon-plus',
@@ -63,11 +69,6 @@ export default {
     tile22() {
       return this.tileDetails(3)
     },
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-    })
   },
   created() {
     this.fetchCases()

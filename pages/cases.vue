@@ -63,6 +63,7 @@
 
 <script>
 import { mapActions, mapGetters, mapMutations } from 'vuex'
+import fetchCasesPageMixin from '@/mixins/fetch-cases-page'
 
 const Filters = () =>
   import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
@@ -81,6 +82,7 @@ export default {
     CaseActions,
     Filters,
   },
+  mixins: [fetchCasesPageMixin],
   data() {
     return {
       filterLoc: null,
@@ -180,11 +182,6 @@ export default {
     this.filterDate = date
     // Initial data
     this.fetchCases()
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$nuxt.$loading.start()
-    })
   },
   methods: {
     ...mapActions('Cases', ['fetchCases']),
