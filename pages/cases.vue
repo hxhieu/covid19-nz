@@ -31,7 +31,7 @@
       <el-col :md="5">
         <Filters
           v-model="filterDate"
-          :fa-icon="['far', 'calendar-alt']"
+          :fa-icon="['fas', 'calendar-alt']"
           header="Dates"
           :values="dateFilters"
           :button-width="170"
