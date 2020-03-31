@@ -155,7 +155,7 @@ export default {
     text-align: center;
 
     .filters {
-      max-width: 1024px;
+      max-width: $contentWidth;
       margin: -20px auto 0 auto;
       [role='radio'] {
         text-align: initial;

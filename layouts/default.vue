@@ -39,6 +39,17 @@ body,
     margin: 10px 0;
   }
 
+  .el-dialog__header {
+    text-align: center;
+
+    .el-dialog__close,
+    .el-dialog__title {
+      font-weight: 700;
+      color: $primaryColor;
+      font-size: 1.5rem;
+    }
+  }
+
   @media only screen and (max-width: $breakpoint-md) {
     font-size: 12px;
   }
@@ -71,7 +82,7 @@ body,
     }
 
     #main-content {
-      max-width: 1024px;
+      max-width: $contentWidth;
       padding: 0 20px 20px 20px;
       margin: 0 auto;
       @media only screen and (max-width: $breakpoint-md) {

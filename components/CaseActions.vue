@@ -86,7 +86,8 @@ export default {
     height: 80vh;
     display: flex;
     flex-wrap: wrap;
-    margin-top: -20px;
+    margin: -20px auto 0 auto;
+    max-width: $contentWidth;
 
     .tile {
       width: 50%;
