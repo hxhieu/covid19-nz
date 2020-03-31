@@ -47,12 +47,12 @@
         </div>
         <div class="tile" @click="$emit('save', 2)">
           <el-card :body-style="cardTileCss">
-            <span class="index">2</span>
+            <span class="index">3</span>
           </el-card>
         </div>
         <div class="tile" @click="$emit('save', 3)">
           <el-card :body-style="cardTileCss">
-            <span class="index">3</span>
+            <span class="index">4</span>
           </el-card>
         </div>
       </div>

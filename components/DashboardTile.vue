@@ -4,6 +4,11 @@
       <i v-if="loading" class="loading el-icon-loading"></i>
       <div v-else class="content">
         <div v-if="tileDetails" class="details">
+          <icon
+            class="delete"
+            icon="el-icon-close"
+            @click.native="deleteTile"
+          ></icon>
           {{ tileDetails.count }}
         </div>
         <nuxt-link v-else :to="navLink" class="empty">
@@ -71,6 +76,11 @@ export default {
       return this.tile
     },
   },
+  methods: {
+    deleteTile() {
+      this.$emit('delete')
+    },
+  },
 }
 </script>
 
@@ -95,10 +105,24 @@ export default {
     height: 100%;
     .content {
       height: 100%;
-      a {
-        text-decoration: none;
+      .details {
+        position: relative;
+
+        .delete {
+          cursor: pointer;
+          position: absolute;
+          color: $primaryColor;
+          font-size: 2rem;
+          right: 0.15rem;
+          top: 0.15rem;
+          opacity: 0.5;
+          &:hover {
+            opacity: 1;
+          }
+        }
       }
       .empty {
+        text-decoration: none;
         display: flex;
         height: 100%;
         align-items: center;

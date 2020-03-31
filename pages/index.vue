@@ -8,6 +8,7 @@
         bg-position="bottom right"
         :tile="tile11"
         :busy="fetchBusy"
+        @delete="clearTile(0)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -15,6 +16,7 @@
         bg-position="bottom left"
         :tile="tile12"
         :busy="fetchBusy"
+        @delete="clearTile(1)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -22,6 +24,7 @@
         bg-position="top right"
         :tile="tile21"
         :busy="fetchBusy"
+        @delete="clearTile(2)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -29,6 +32,7 @@
         bg-position="top left"
         :tile="tile22"
         :busy="fetchBusy"
+        @delete="clearTile(3)"
       ></DashboardTile>
     </div>
   </div>
@@ -84,6 +88,7 @@ export default {
   },
   methods: {
     ...mapActions('Cases', ['fetchCases']),
+    ...mapActions('Dashboard', ['clearTile']),
   },
 }
 </script>
