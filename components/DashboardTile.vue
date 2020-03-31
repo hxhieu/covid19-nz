@@ -1,7 +1,8 @@
 <template>
-  <div v-loading="loading" class="dashboard-tile">
+  <div class="dashboard-tile">
     <el-card :body-style="cardTileCss">
-      <nuxt-link :to="navLink" class="empty">
+      <i v-if="loading" class="loading el-icon-loading"></i>
+      <nuxt-link v-else :to="navLink" class="empty">
         <span class="bg" :style="{ background: bg }"></span>
         <i :class="emptyIcon"></i>
       </nuxt-link>
@@ -64,6 +65,17 @@ export default {
   height: 50%;
   width: 50%;
   padding: 5px;
+  position: relative;
+
+  .loading {
+    font-size: 4rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -2rem;
+    margin-left: -2rem;
+    color: $primaryColor;
+  }
 
   .el-card {
     height: 100%;

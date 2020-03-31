@@ -2,13 +2,16 @@ import Vue from 'vue'
 
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
-import { Loading } from 'element-ui'
 
 locale.use(lang)
 
-Vue.use(Loading)
-
 export default () => {
+  /* Common */
+  Vue.component('icon', () =>
+    import(/* webpackChunkName: 'components-icon' */ '../components/Icon')
+  )
+
+  /* Element UI */
   Vue.component('el-button', () =>
     import(/* webpackChunkName: 'element-ui-button' */ 'element-ui/lib/button')
   )

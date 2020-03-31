@@ -42,6 +42,11 @@ export default {
       navLink: '/cases',
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    })
+  },
 }
 </script>
 

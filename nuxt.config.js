@@ -32,7 +32,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#3b8070' },
   /*
    ** Global CSS
    */
@@ -56,6 +56,25 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    [
+      'nuxt-fontawesome',
+      {
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['fas'],
+          },
+          {
+            set: '@fortawesome/free-regular-svg-icons',
+            icons: ['far'],
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['fab'],
+          },
+        ],
+      },
+    ],
   ],
   /*
    ** Axios module configuration

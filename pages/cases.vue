@@ -4,7 +4,7 @@
       <el-col :md="8">
         <Filters
           v-model="filterLoc"
-          icon="el-icon-map-location"
+          :fa-icon="['fas', 'map-marked-alt']"
           header="DHBs"
           :values="locationFilters"
           :button-width="220"
@@ -13,7 +13,7 @@
       <el-col :md="4">
         <Filters
           v-model="filterAge"
-          icon="el-icon-user"
+          :fa-icon="['fas', 'user']"
           header="Ages"
           :values="ageFilters"
           :button-width="150"
@@ -22,7 +22,7 @@
       <el-col :md="4">
         <Filters
           v-model="filterGender"
-          icon="el-icon-s-data"
+          :fa-icon="['fas', 'venus-mars']"
           header="Gender"
           :values="genderFilters"
           :button-width="140"
@@ -31,7 +31,7 @@
       <el-col :md="5">
         <Filters
           v-model="filterDate"
-          icon="el-icon-date"
+          :fa-icon="['far', 'calendar-alt']"
           header="Dates"
           :values="dateFilters"
           :button-width="170"
@@ -50,7 +50,10 @@
       <strong>{{ filtered.length }}</strong>
       cases across New Zealand. Use the filters above to find out more!
     </label>
-    <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
+    <div v-if="showSummary">
+      <CaseActions></CaseActions>
+      <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
+    </div>
   </div>
 </template>
 
@@ -63,10 +66,15 @@ const CaseTable = () =>
   import(
     /* webpackChunkName: 'components-case-table' */ '../components/CaseTable'
   )
+const CaseActions = () =>
+  import(
+    /* webpackChunkName: 'components-case-actions' */ '../components/CaseActions'
+  )
 
 export default {
   components: {
     CaseTable,
+    CaseActions,
     Filters,
   },
   data() {
@@ -169,6 +177,11 @@ export default {
     // Initial data
     this.fetchCases()
   },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start()
+    })
+  },
   methods: {
     ...mapActions('Cases', {
       fetchCases: 'fetchRecords',
@@ -188,7 +201,7 @@ export default {
     display: flex;
     background: $primaryColor;
     color: #fff;
-    padding: 11px 0;
+    padding: 9px 0;
     margin-bottom: 10px;
     border-radius: 4px;
     align-items: center;

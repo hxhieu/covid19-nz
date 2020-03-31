@@ -5,7 +5,7 @@
       :class="{ 'has-filter': filter !== allKey }"
       @click="setFilter"
     >
-      <i :class="allIcon" class="icon"></i>
+      <icon :fa-icon="faIcon" :icon="icon"></icon>
       <span class="value">
         {{ filter === allKey ? `${allKey} ${header}` : filter }}
       </span>
@@ -49,6 +49,12 @@ export default {
         return 'el-icon-s-grid'
       },
     },
+    faIcon: {
+      type: Array,
+      default() {
+        return null
+      },
+    },
     header: {
       type: String,
       default() {
@@ -83,9 +89,6 @@ export default {
         result[val] = (result[val] || 0) + 1
       })
       return result
-    },
-    allIcon() {
-      return this.icon
     },
     selectionWidth() {
       return this.buttonWidth
@@ -134,7 +137,7 @@ export default {
     border-radius: 4px;
     color: $primaryColor;
     border: 1px solid $primaryColor;
-    padding: 10px;
+    padding: 8px 15px;
     cursor: pointer;
 
     &:hover {
