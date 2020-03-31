@@ -2,7 +2,11 @@ import Vue from 'vue'
 
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
+import { Loading } from 'element-ui'
+
 locale.use(lang)
+
+Vue.use(Loading)
 
 export default () => {
   Vue.component('el-button', () =>
@@ -69,6 +73,7 @@ const styles = [
   './node_modules/element-ui/packages/theme-chalk/src/select.scss',
   './node_modules/element-ui/packages/theme-chalk/src/option.scss',
   './node_modules/element-ui/packages/theme-chalk/src/dialog.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/loading.scss',
 ]
 
 export { styles }

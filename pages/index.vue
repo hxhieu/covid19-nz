@@ -1,188 +1,64 @@
 <template>
-  <div class="container">
-    <el-row class="filters" :gutter="10">
-      <el-col :md="8">
-        <Filters
-          v-model="filterLoc"
-          icon="el-icon-map-location"
-          header="DHBs"
-          :values="locationFilters"
-          :button-width="220"
-        ></Filters>
-      </el-col>
-      <el-col :md="4">
-        <Filters
-          v-model="filterAge"
-          icon="el-icon-user"
-          header="Ages"
-          :values="ageFilters"
-          :button-width="150"
-        ></Filters>
-      </el-col>
-      <el-col :md="4">
-        <Filters
-          v-model="filterGender"
-          icon="el-icon-s-data"
-          header="Gender"
-          :values="genderFilters"
-          :button-width="140"
-        ></Filters>
-      </el-col>
-      <el-col :md="5">
-        <Filters
-          v-model="filterDate"
-          icon="el-icon-date"
-          header="Dates"
-          :values="dateFilters"
-          :button-width="170"
-        ></Filters>
-      </el-col>
-      <el-col :md="3">
-        <span class="total">
-          <label class="hidden-md-and-up">Total:&nbsp;</label>
-          {{ filtered.length }}
-        </span>
-      </el-col>
-    </el-row>
-    <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
+  <div class="dashboard">
+    <!-- <div class="summary"><el-card></el-card></div> -->
+    <div class="favs">
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-11.png"
+        bg-position="bottom right"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-12.png"
+        bg-position="bottom left"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-21.png"
+        bg-position="top right"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-22.png"
+        bg-position="top left"
+      ></DashboardTile>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
-const Filters = () =>
-  import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
-const CaseTable = () =>
+const DashboardTile = () =>
   import(
-    /* webpackChunkName: 'components-case-table' */ '../components/CaseTable'
+    /* webpackChunkName: 'components-dashboard-tile' */ '../components/DashboardTile'
   )
 
 export default {
   components: {
-    CaseTable,
-    Filters,
+    DashboardTile,
   },
   data() {
     return {
-      filterLoc: null,
-      filterAge: null,
-      filterGender: null,
-      filterDate: null,
+      emptyIcon: 'el-icon-plus',
+      navLink: '/cases',
     }
-  },
-  computed: {
-    ...mapGetters('Cases', ['allCases', 'filteredCases']),
-    filtered() {
-      return this.filteredCases({
-        age: this.filterAge,
-        date: this.filterDate,
-        gender: this.filterGender,
-        location: this.filterLoc,
-      })
-    },
-    locationFilters() {
-      return this.filtered.map(x => x.location).sort()
-    },
-    ageFilters() {
-      return this.filtered.map(x => x.age).sort()
-    },
-    genderFilters() {
-      return this.filtered.map(x => x.gender).sort()
-    },
-    dateFilters() {
-      return this.filtered
-        .map(x => x.date)
-        .sort((x, y) => {
-          const date1parts = x.split('-')
-          const date1 = new Date(date1parts[2], date1parts[1], date1parts[0])
-          const date2parts = y.split('-')
-          const date2 = new Date(date2parts[2], date2parts[1], date2parts[0])
-          if (date1 === date2) return 0
-          return date1 < date2 ? 1 : -1
-        })
-    },
-    showSummary() {
-      return (
-        this.filterLoc || this.filterAge || this.filterGender || this.filterDate
-      )
-    },
-  },
-  watch: {
-    filterLoc(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          location: val,
-          age: this.filterAge,
-          gender: this.filterGender,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterAge(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          age: val,
-          location: this.filterLoc,
-          gender: this.filterGender,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterGender(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          gender: val,
-          location: this.filterLoc,
-          age: this.filterAge,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterDate(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          date: val,
-          gender: this.filterGender,
-          location: this.filterLoc,
-          age: this.filterAge,
-        },
-      })
-    },
-  },
-  created() {
-    const { date, location, age, gender } = this.$route.query
-    this.filterLoc = location
-    this.filterAge = age
-    this.filterGender = gender
-    this.filterDate = date
-    // Initial data
-    this.fetchCases()
-  },
-  methods: {
-    ...mapActions('Cases', {
-      fetchCases: 'fetchRecords',
-    }),
   },
 }
 </script>
 
-<style scoped lang="scss">
-.filters {
-  .total {
+<style lang="scss" scoped>
+.dashboard {
+  height: calc(100% - #{$headerHeight});
+  .summary {
+    padding: 5px;
+    height: 100px;
+    .el-card {
+      height: 100%;
+    }
+  }
+  .favs {
+    height: 100%;
     display: flex;
-    background: $primaryColor;
-    color: #fff;
-    padding: 11px 0;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
+    flex-wrap: wrap;
   }
 }
 </style>

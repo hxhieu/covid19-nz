@@ -1,7 +1,7 @@
 <template>
   <div id="main-container">
     <h1 id="main-header">
-      <nuxt-link to="/"><i class="el-icon-s-grid"></i></nuxt-link>
+      <nuxt-link to="/cases"><i class="el-icon-s-unfold"></i></nuxt-link>
       <nuxt-link class="header-text" to="/">
         COVID-19 NZ Update
       </nuxt-link>
@@ -12,7 +12,11 @@
 </template>
 
 <style lang="scss">
-html {
+html,
+body,
+#__nuxt,
+#__layout,
+#main-container {
   font-family: 'Titillium Web', sans-serif;
   font-size: 18px;
   word-spacing: 1px;
@@ -22,6 +26,9 @@ html {
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   overflow-y: scroll;
+  color: #444;
+  height: 100%;
+  overflow: auto;
 
   h1 {
     font-size: 2rem;
@@ -46,7 +53,8 @@ html {
     }
 
     #main-header {
-      padding: 20px;
+      height: $headerHeight;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -56,6 +64,9 @@ html {
         i {
           font-size: 1.25em;
         }
+      }
+      @media only screen and (max-width: $breakpoint-md) {
+        margin: 0;
       }
     }
 
