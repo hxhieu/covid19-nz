@@ -2,10 +2,15 @@
   <div class="dashboard-tile">
     <el-card :body-style="cardTileCss">
       <i v-if="loading" class="loading el-icon-loading"></i>
-      <nuxt-link v-else :to="navLink" class="empty">
-        <span class="bg" :style="{ background: bg }"></span>
-        <i :class="emptyIcon"></i>
-      </nuxt-link>
+      <div v-else class="content">
+        <div v-if="tileDetails" class="details">
+          {{ tileDetails.count }}
+        </div>
+        <nuxt-link v-else :to="navLink" class="empty">
+          <span class="bg" :style="{ background: bg }"></span>
+          <i :class="emptyIcon"></i>
+        </nuxt-link>
+      </div>
     </el-card>
   </div>
 </template>
@@ -13,6 +18,12 @@
 <script>
 export default {
   props: {
+    tile: {
+      type: Object,
+      default() {
+        return null
+      },
+    },
     emptyIcon: {
       type: String,
       default() {
@@ -56,6 +67,9 @@ export default {
     bg() {
       return `url("${this.bgImg}") no-repeat ${this.bgPosition}`
     },
+    tileDetails() {
+      return this.tile
+    },
   },
 }
 </script>
@@ -66,7 +80,6 @@ export default {
   width: 50%;
   padding: 5px;
   position: relative;
-  cursor: pointer;
 
   .loading {
     font-size: 4rem;
@@ -80,35 +93,37 @@ export default {
 
   .el-card {
     height: 100%;
-    a {
-      text-decoration: none;
-    }
-    .empty {
-      display: flex;
+    .content {
       height: 100%;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      i {
-        font-size: 6rem;
-        color: $primaryColor;
-        opacity: 0.5;
+      a {
+        text-decoration: none;
       }
-      .bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        opacity: 0.2;
-      }
-    }
-
-    &:hover {
-      border: 6px solid $primaryColor;
       .empty {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
         i {
-          opacity: 1;
+          font-size: 6rem;
+          color: $primaryColor;
+          opacity: 0.5;
+        }
+        .bg {
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          right: 0;
+          opacity: 0.2;
+        }
+
+        &:hover {
+          border: 6px solid $primaryColor;
+          i {
+            opacity: 1;
+          }
         }
       }
     }

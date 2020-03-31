@@ -9,5 +9,7 @@ export const mutations = {
 }
 
 export const getters = {
-  getTile: state => index => state.tiles[index],
+  getTile: state => index => {
+    return state.tiles[index]
+  },
 }
