@@ -101,6 +101,13 @@ body,
       padding: 10px;
     }
 
+    a {
+      color: $primaryColor;
+      svg {
+        font-size: 0.7em;
+      }
+    }
+
     #main-header {
       height: $headerHeight;
       padding: 0 20px;
@@ -108,7 +115,6 @@ body,
       justify-content: space-between;
       align-items: center;
       a {
-        color: $primaryColor;
         text-decoration: none;
         i {
           font-size: 1.25em;
