@@ -147,24 +147,13 @@ body,
     }
   }
 
-  @media only screen and (max-width: $breakpoint-md) {
-    font-size: 12px;
-  }
-
-  @media only screen and (max-width: $breakpoint-sm) {
-    font-size: 10px;
+  @media only screen and (max-width: $breakpoint-xs) {
+    font-size: 16px;
   }
 
   #main-container {
-    @media only screen and (max-width: $breakpoint-md) {
-      padding: 10px;
-    }
-
     a {
       color: $primaryColor;
-      svg {
-        font-size: 0.7em;
-      }
     }
 
     #main-header {
@@ -173,15 +162,13 @@ body,
       display: flex;
       justify-content: space-between;
       align-items: center;
+      font-size: 1.5rem;
       a {
         text-decoration: none;
         .home-icon {
           font-size: 1.25em;
           margin-right: 5px;
         }
-      }
-      @media only screen and (max-width: $breakpoint-md) {
-        margin: 0;
       }
     }
 
@@ -190,7 +177,7 @@ body,
       padding: 0 20px 35px 20px;
       margin: 0 auto;
       @media only screen and (max-width: $breakpoint-md) {
-        padding: 5px;
+        padding: 0 10px 35px 10px;
       }
     }
   }
