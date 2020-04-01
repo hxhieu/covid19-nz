@@ -82,7 +82,8 @@ body,
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
   overflow-y: scroll;
-  color: #444;
+  color: $foregroundColor;
+  background: $backgroundColor;
   height: 100%;
   overflow: auto;
 
@@ -108,14 +109,18 @@ body,
     }
   }
 
-  .el-dialog__header {
-    text-align: center;
+  .el-dialog {
+    background: $backgroundColor;
+    color: $foregroundColor;
+    .el-dialog__header {
+      text-align: center;
 
-    .el-dialog__close,
-    .el-dialog__title {
-      font-weight: 700;
-      color: $primaryColor;
-      font-size: 1.5rem;
+      .el-dialog__close,
+      .el-dialog__title {
+        font-weight: 700;
+        color: $primaryColor;
+        font-size: 1.5rem;
+      }
     }
   }
 

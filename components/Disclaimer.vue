@@ -41,14 +41,14 @@
 
 <style lang="scss" scoped>
 #disclaimer {
-  padding: 0.25rem 2rem 0 2rem;
-  background: #333;
-  color: #fff;
+  padding: 0.5rem 2rem 0 2rem;
+  background: $backgroundDarker;
+  color: $foregroundColor;
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  border-top: 1px solid #eee;
+  border-top: 1px dashed $primaryColor;
 
   .header {
     svg {
@@ -62,6 +62,7 @@
     margin: 1.5rem;
     .el-button {
       font-weight: 700;
+      color: $backgroundColor;
     }
   }
 }

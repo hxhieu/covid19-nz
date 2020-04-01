@@ -154,7 +154,8 @@ export default {
       .details {
         height: 100%;
         position: relative;
-        padding: 2rem 1rem;
+        padding: 1.5rem;
+        background: #f0f0f0;
 
         .tile-action {
           cursor: pointer;

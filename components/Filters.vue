@@ -123,7 +123,7 @@ export default {
   display: inline-block;
   background: $primaryColor;
   border-radius: 4px;
-  color: #fff;
+  color: $backgroundDarker;
   text-align: center;
   font-weight: 700;
 }
@@ -141,13 +141,13 @@ export default {
 
     &:hover {
       background: $primaryColor;
-      color: #fff;
+      color: $backgroundColor;
     }
 
     &.has-filter {
       font-weight: 700;
       background: $primaryColor;
-      color: #fff;
+      color: $backgroundColor;
     }
   }
 
@@ -160,6 +160,8 @@ export default {
       [role='radio'] {
         text-align: initial;
         margin: 0 0 5px 5px !important;
+        border-color: $primaryColor;
+        color: $primaryColor !important;
         .el-radio__label {
           display: inline-block;
           position: relative;
@@ -169,22 +171,6 @@ export default {
             position: absolute;
             right: 10px;
             top: 10px;
-          }
-        }
-
-        &.is-active {
-          .count {
-            background: #fff;
-            color: $primaryColor;
-          }
-        }
-
-        .item-text {
-          display: inline-block;
-          & > div {
-            padding-right: 10px;
-            display: flex;
-            justify-content: space-between;
           }
         }
 

@@ -47,7 +47,7 @@
     <label v-if="!showSummary" class="no-filters-instruction">
       <i class="el-icon-warning-outline"></i>
       There is a total of
-      <strong>{{ filtered.length }}</strong>
+      <span class="total">{{ filtered.length }}</span>
       cases across New Zealand. Use the filters above to find out more!
     </label>
     <div v-else>
@@ -209,12 +209,16 @@ export default {
   display: block;
   text-align: center;
   padding: 10px;
+  .total {
+    font-weight: 700;
+    color: $primaryColor;
+  }
 }
 .filters {
   .total {
     display: flex;
     background: $primaryColor;
-    color: #fff;
+    color: $backgroundColor;
     padding: 9px 0;
     border-radius: 4px;
     align-items: center;

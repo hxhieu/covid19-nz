@@ -48,7 +48,10 @@ export default {
   font-size: 1rem;
 }
 .case-item {
+  background: lighten($backgroundColor, 5);
+  border-color: $backgroundDarker;
   margin-bottom: 5px;
+  color: $foregroundColor;
   a,
   i,
   svg {
@@ -56,11 +59,11 @@ export default {
   }
   &:hover {
     background: $primaryColor;
-    color: #fff;
+    color: $backgroundColor;
     a,
     i,
     svg {
-      color: #fff;
+      color: darken($primaryColor, 20);
     }
   }
   @media only screen and (max-width: $breakpoint-md) {
