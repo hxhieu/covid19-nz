@@ -5,6 +5,7 @@
         <i class="el-icon-s-unfold"></i>
       </a>
       <nuxt-link class="header-text" to="/">
+        <icon class="home-icon" icon="el-icon-s-home"></icon>
         COVID-19 Board
       </nuxt-link>
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
@@ -152,8 +153,9 @@ body,
       align-items: center;
       a {
         text-decoration: none;
-        i {
+        .home-icon {
           font-size: 1.25em;
+          margin-right: 5px;
         }
       }
       @media only screen and (max-width: $breakpoint-md) {

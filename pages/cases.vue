@@ -45,7 +45,7 @@
       </el-col>
     </el-row>
     <label v-if="!showSummary" class="no-filters-instruction">
-      <i class="el-icon-warning-outline"></i>
+      <icon :fa-icon="['fas', 'exclamation-triangle']"></icon>
       There is a total of
       <span class="total">{{ filtered.length }}</span>
       cases across New Zealand. Use the filters above to find out more!
@@ -209,9 +209,12 @@ export default {
   display: block;
   text-align: center;
   padding: 10px;
+  svg {
+    color: orange;
+  }
   .total {
     font-weight: 700;
-    color: $primaryColor;
+    color: $palette2;
   }
 }
 .filters {

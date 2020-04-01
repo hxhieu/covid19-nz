@@ -123,7 +123,7 @@ export default {
   display: inline-block;
   background: $primaryColor;
   border-radius: 4px;
-  color: $backgroundDarker;
+  color: $backgroundColor;
   text-align: center;
   font-weight: 700;
 }
@@ -160,8 +160,9 @@ export default {
       [role='radio'] {
         text-align: initial;
         margin: 0 0 5px 5px !important;
-        border-color: $primaryColor;
-        color: $primaryColor !important;
+        border-color: $backgroundDarker;
+        color: $foregroundColor !important;
+        background: lighten($backgroundColor, 5);
         .el-radio__label {
           display: inline-block;
           position: relative;

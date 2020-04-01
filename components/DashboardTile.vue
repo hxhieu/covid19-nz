@@ -5,7 +5,7 @@
       <div v-else class="content">
         <div v-if="tileDetails" class="details">
           <icon
-            class="tile-action top left refresh"
+            class="tile-action bottom left refresh"
             icon="el-icon-refresh-right"
             @click.native="refreshTile"
           ></icon>
@@ -160,7 +160,7 @@ export default {
         .tile-action {
           cursor: pointer;
           position: absolute;
-          color: $primaryColor;
+          color: $palette4;
           font-size: 2rem;
           opacity: 0.7;
 
@@ -195,37 +195,37 @@ export default {
 
           &.location {
             svg {
-              color: green;
+              color: $palette4;
             }
           }
 
           &.age {
             svg {
-              color: purple;
+              color: $palette3;
             }
           }
 
           &.gender {
             svg {
-              color: pink;
+              color: $palette2;
             }
           }
 
           &.date {
             svg {
-              color: gray;
+              color: $palette1;
             }
           }
 
           &.count {
             position: absolute;
-            color: salmon;
+            color: $palette2;
             font-size: 4rem;
             line-height: 4rem;
             bottom: 2rem;
             right: 2rem;
-            border-right: 2px solid salmon;
-            border-bottom: 2px solid salmon;
+            border-right: 2px solid $palette2;
+            border-bottom: 2px solid $palette2;
             padding: 1rem;
           }
         }

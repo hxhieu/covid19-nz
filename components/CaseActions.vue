@@ -104,6 +104,11 @@ export default {
       width: 50%;
       height: 50%;
       padding: 5px;
+      opacity: 0.4;
+      &:hover {
+        border: 4px solid $primaryColor;
+        opacity: 1;
+      }
 
       .el-card {
         height: 100%;
@@ -112,19 +117,11 @@ export default {
         cursor: pointer;
 
         .index {
-          opacity: 0.5;
           height: 100%;
           width: 100%;
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        &:hover {
-          border: 4px solid $primaryColor;
-          .index {
-            opacity: 1;
-          }
         }
       }
     }

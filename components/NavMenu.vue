@@ -56,6 +56,7 @@ export default {
     align-items: center;
     color: $primaryColor;
     font-size: 1.5em;
+    margin: 10px 0;
     svg {
       font-size: 1.2em !important;
       margin-right: 10px;
@@ -63,6 +64,10 @@ export default {
     a {
       padding: 0;
       margin: 0;
+      text-decoration-color: $palette2;
+      &:hover {
+        text-decoration-color: initial;
+      }
     }
   }
 }

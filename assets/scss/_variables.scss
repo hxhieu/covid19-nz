@@ -1,4 +1,11 @@
-$primaryColor: #7fff00;
+/* https://www.shutterstock.com/blog/neon-color-palettes */
+/* Luxurious Lights */
+$palette1: #ce96fb;
+$palette2: #ff8fcf;
+$palette3: #00c2ba;
+$palette4: #037a90;
+
+$primaryColor: $palette3;
 $backgroundColor: #333;
 $backgroundDarker: darken($backgroundColor, 5);
 $foregroundColor: #eee;
