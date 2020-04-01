@@ -56,13 +56,6 @@
     }
   }
 
-  a {
-    color: $primaryColor;
-    svg {
-      font-size: 0.7em;
-    }
-  }
-
   .button {
     text-align: center;
     margin: 1.5rem;
