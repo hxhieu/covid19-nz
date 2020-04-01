@@ -1,9 +1,11 @@
 <template>
   <div id="main-container">
     <h1 id="main-header">
-      <nuxt-link to="/cases"><i class="el-icon-s-unfold"></i></nuxt-link>
+      <a href="" @click.prevent="showMenu = true">
+        <i class="el-icon-s-unfold"></i>
+      </a>
       <nuxt-link class="header-text" to="/">
-        COVID-19 NZ Update
+        COVID-19 Board
       </nuxt-link>
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
     </h1>
@@ -12,6 +14,9 @@
       v-if="!termsAccepted"
       @accept="setAcceptTerms(true)"
     ></Disclaimer>
+    <el-dialog fullscreen :visible.sync="showMenu" title="Menu">
+      <NavMenu :items="menuItems" @close="showMenu = false"></NavMenu>
+    </el-dialog>
   </div>
 </template>
 
@@ -23,9 +28,35 @@ const Disclaimer = () =>
     /* webpackChunkName: 'components-disclaimer' */ '../components/Disclaimer'
   )
 
+const NavMenu = () =>
+  import(/* webpackChunkName: 'components-nav-menu' */ '../components/NavMenu')
+
 export default {
   components: {
     Disclaimer,
+    NavMenu,
+  },
+  data() {
+    return {
+      showMenu: false,
+      menuItems: [
+        {
+          text: 'Dashboard',
+          faIcon: ['fas', 'th-large'],
+          path: '/',
+        },
+        {
+          text: 'Cases',
+          faIcon: ['fas', 'th-list'],
+          path: '/cases',
+        },
+        {
+          text: 'About',
+          faIcon: ['fas', 'question-circle'],
+          path: '/about',
+        },
+      ],
+    }
   },
   computed: {
     ...mapState('Dashboard', ['termsAccepted']),
