@@ -28,8 +28,15 @@
     <br />
     <p>
       So COVID-19 Board is born, with the idea of having some custom query on
-      your hand (Yes! it works really well on your phones!), then you can check
-      them every morning just with a finger swipe.
+      your hand
+      <a
+        target="_blank"
+        href="https://www.howtogeek.com/196087/how-to-add-websites-to-the-home-screen-on-any-smartphone-or-tablet/"
+      >
+        Yes! it works really well on your phones!
+        <icon :fa-icon="['fas', 'external-link-alt']"></icon>
+      </a>
+      then you can check them every morning just with a finger swipe.
     </p>
     <br />
     <p>

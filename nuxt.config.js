@@ -10,7 +10,7 @@ export default {
    ** Headers of the page
    */
   head: {
-    title: 'COVID-19 NZ Update',
+    title: 'COVID-19 Board',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
