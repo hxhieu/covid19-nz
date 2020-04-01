@@ -1,4 +1,7 @@
-$primaryColor: #3b8070;
+$primaryColor: #7fff00;
+$backgroundColor: #333;
+$backgroundDarker: darken($backgroundColor, 5);
+$foregroundColor: #eee;
 $breakpoint-md: 570px;
 $breakpoint-sm: 320px;
 
