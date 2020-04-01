@@ -5,7 +5,7 @@
       :class="{ 'has-filter': filter !== allKey }"
       @click="setFilter"
     >
-      <i :class="allIcon" class="icon"></i>
+      <icon :fa-icon="faIcon" :icon="icon"></icon>
       <span class="value">
         {{ filter === allKey ? `${allKey} ${header}` : filter }}
       </span>
@@ -49,6 +49,12 @@ export default {
         return 'el-icon-s-grid'
       },
     },
+    faIcon: {
+      type: Array,
+      default() {
+        return null
+      },
+    },
     header: {
       type: String,
       default() {
@@ -83,9 +89,6 @@ export default {
         result[val] = (result[val] || 0) + 1
       })
       return result
-    },
-    allIcon() {
-      return this.icon
     },
     selectionWidth() {
       return this.buttonWidth
@@ -126,7 +129,6 @@ export default {
 }
 
 .filter-wrapper {
-  margin-bottom: 10px;
   .filter-badge {
     display: flex;
     align-items: center;
@@ -134,7 +136,7 @@ export default {
     border-radius: 4px;
     color: $primaryColor;
     border: 1px solid $primaryColor;
-    padding: 10px;
+    padding: 8px 15px;
     cursor: pointer;
 
     &:hover {
@@ -150,12 +152,13 @@ export default {
   }
 
   .filters-container {
-    .el-dialog__body {
-      padding: 0;
-    }
+    text-align: center;
 
     .filters {
+      max-width: $contentWidth;
+      margin: -20px auto 0 auto;
       [role='radio'] {
+        text-align: initial;
         margin: 0 0 5px 5px !important;
         .el-radio__label {
           display: inline-block;

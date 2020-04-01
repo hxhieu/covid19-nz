@@ -2,9 +2,16 @@ import Vue from 'vue'
 
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
+
 locale.use(lang)
 
 export default () => {
+  /* Common */
+  Vue.component('icon', () =>
+    import(/* webpackChunkName: 'components-icon' */ '../components/Icon')
+  )
+
+  /* Element UI */
   Vue.component('el-button', () =>
     import(/* webpackChunkName: 'element-ui-button' */ 'element-ui/lib/button')
   )
@@ -69,6 +76,8 @@ const styles = [
   './node_modules/element-ui/packages/theme-chalk/src/select.scss',
   './node_modules/element-ui/packages/theme-chalk/src/option.scss',
   './node_modules/element-ui/packages/theme-chalk/src/dialog.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/loading.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/notification.scss',
 ]
 
 export { styles }

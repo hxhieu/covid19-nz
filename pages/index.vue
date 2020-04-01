@@ -1,188 +1,141 @@
 <template>
-  <div class="container">
-    <el-row class="filters" :gutter="10">
-      <el-col :md="8">
-        <Filters
-          v-model="filterLoc"
-          icon="el-icon-map-location"
-          header="DHBs"
-          :values="locationFilters"
-          :button-width="220"
-        ></Filters>
-      </el-col>
-      <el-col :md="4">
-        <Filters
-          v-model="filterAge"
-          icon="el-icon-user"
-          header="Ages"
-          :values="ageFilters"
-          :button-width="150"
-        ></Filters>
-      </el-col>
-      <el-col :md="4">
-        <Filters
-          v-model="filterGender"
-          icon="el-icon-s-data"
-          header="Gender"
-          :values="genderFilters"
-          :button-width="140"
-        ></Filters>
-      </el-col>
-      <el-col :md="5">
-        <Filters
-          v-model="filterDate"
-          icon="el-icon-date"
-          header="Dates"
-          :values="dateFilters"
-          :button-width="170"
-        ></Filters>
-      </el-col>
-      <el-col :md="3">
-        <span class="total">
-          <label class="hidden-md-and-up">Total:&nbsp;</label>
-          {{ filtered.length }}
-        </span>
-      </el-col>
-    </el-row>
-    <CaseTable v-if="showSummary" :records="filtered"></CaseTable>
+  <div class="dashboard">
+    <!-- <div class="summary"><el-card></el-card></div> -->
+    <div class="favs">
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-11.png"
+        bg-position="bottom right"
+        :tile="tile11"
+        :busy="fetchBusy"
+        @delete="clearTile(0)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(0)"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-12.png"
+        bg-position="bottom left"
+        :tile="tile12"
+        :busy="fetchBusy"
+        @delete="clearTile(1)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(1)"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-21.png"
+        bg-position="top right"
+        :tile="tile21"
+        :busy="fetchBusy"
+        @delete="clearTile(2)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(2)"
+      ></DashboardTile>
+      <DashboardTile
+        :nav-link="navLink"
+        bg-img="img/nz-22.png"
+        bg-position="top left"
+        :tile="tile22"
+        :busy="fetchBusy"
+        @delete="clearTile(3)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(3)"
+      ></DashboardTile>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { Notification } from 'element-ui'
+import fetchCasesPageMixin from '@/mixins/fetch-cases-page'
 
-const Filters = () =>
-  import(/* webpackChunkName: 'components-filters' */ '../components/Filters')
-const CaseTable = () =>
+const DashboardTile = () =>
   import(
-    /* webpackChunkName: 'components-case-table' */ '../components/CaseTable'
+    /* webpackChunkName: 'components-dashboard-tile' */ '../components/DashboardTile'
   )
 
 export default {
   components: {
-    CaseTable,
-    Filters,
+    DashboardTile,
   },
+  mixins: [fetchCasesPageMixin],
   data() {
     return {
-      filterLoc: null,
-      filterAge: null,
-      filterGender: null,
-      filterDate: null,
+      emptyIcon: 'el-icon-plus',
+      navLink: '/cases',
     }
   },
   computed: {
-    ...mapGetters('Cases', ['allCases', 'filteredCases']),
-    filtered() {
-      return this.filteredCases({
-        age: this.filterAge,
-        date: this.filterDate,
-        gender: this.filterGender,
-        location: this.filterLoc,
-      })
+    ...mapGetters('Cases', ['filteredCases']),
+    ...mapGetters('Dashboard', ['getTile']),
+    tile11() {
+      return this.tileDetails(0)
     },
-    locationFilters() {
-      return this.filtered.map(x => x.location).sort()
+    tile12() {
+      return this.tileDetails(1)
     },
-    ageFilters() {
-      return this.filtered.map(x => x.age).sort()
+    tile21() {
+      return this.tileDetails(2)
     },
-    genderFilters() {
-      return this.filtered.map(x => x.gender).sort()
+    tile22() {
+      return this.tileDetails(3)
     },
-    dateFilters() {
-      return this.filtered
-        .map(x => x.date)
-        .sort((x, y) => {
-          const date1parts = x.split('-')
-          const date1 = new Date(date1parts[2], date1parts[1], date1parts[0])
-          const date2parts = y.split('-')
-          const date2 = new Date(date2parts[2], date2parts[1], date2parts[0])
-          if (date1 === date2) return 0
-          return date1 < date2 ? 1 : -1
-        })
-    },
-    showSummary() {
-      return (
-        this.filterLoc || this.filterAge || this.filterGender || this.filterDate
-      )
+    isEmpty() {
+      return !this.tile11 && !this.tile12 && !this.tile21 && !this.tile22
     },
   },
   watch: {
-    filterLoc(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          location: val,
-          age: this.filterAge,
-          gender: this.filterGender,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterAge(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          age: val,
-          location: this.filterLoc,
-          gender: this.filterGender,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterGender(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          gender: val,
-          location: this.filterLoc,
-          age: this.filterAge,
-          date: this.filterDate,
-        },
-      })
-    },
-    filterDate(val, oldVal) {
-      if (val === oldVal) return
-      this.$router.push({
-        query: {
-          date: val,
-          gender: this.filterGender,
-          location: this.filterLoc,
-          age: this.filterAge,
-        },
-      })
+    fetchBusy(val) {
+      if (!val && this.isEmpty) {
+        Notification.info({
+          title: 'Your dashboard is empty!',
+          message:
+            'Let us start by clicking or touching the tiles below for more details',
+          duration: 0,
+          customClass: 'custom-notification centre',
+        })
+      }
     },
   },
   created() {
-    const { date, location, age, gender } = this.$route.query
-    this.filterLoc = location
-    this.filterAge = age
-    this.filterGender = gender
-    this.filterDate = date
-    // Initial data
     this.fetchCases()
+    this.tileDetails = index => {
+      const filters = this.getTile(index)
+      if (!filters) return null
+      const data = this.filteredCases(filters)
+      return {
+        ...filters,
+        count: data.length,
+      }
+    }
   },
   methods: {
-    ...mapActions('Cases', {
-      fetchCases: 'fetchRecords',
-    }),
+    ...mapActions('Cases', ['fetchCases']),
+    ...mapActions('Dashboard', ['clearTile']),
+    gotoListing(index) {
+      const query = this.getTile(index)
+      this.$router.push({ path: '/cases', query })
+    },
   },
 }
 </script>
 
-<style scoped lang="scss">
-.filters {
-  .total {
+<style lang="scss" scoped>
+.dashboard {
+  height: calc(100% - #{$headerHeight});
+  .summary {
+    padding: 5px;
+    height: 100px;
+    .el-card {
+      height: 100%;
+    }
+  }
+  .favs {
+    height: 100%;
     display: flex;
-    background: $primaryColor;
-    color: #fff;
-    padding: 11px 0;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
+    flex-wrap: wrap;
   }
 }
 </style>

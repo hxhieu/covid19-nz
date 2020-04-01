@@ -32,7 +32,7 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { color: '#3b8070', height: '4px' },
   /*
    ** Global CSS
    */
@@ -40,7 +40,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: ['@/plugins/element-ui'],
+  plugins: [
+    '@/plugins/element-ui',
+    { src: '@/plugins/vuex-persist', ssr: false },
+  ],
   /*
    ** Nuxt.js dev-modules
    */
@@ -56,7 +59,32 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
+    [
+      'nuxt-fontawesome',
+      {
+        imports: [
+          {
+            set: '@fortawesome/free-solid-svg-icons',
+            icons: ['fas'],
+          },
+          {
+            set: '@fortawesome/free-brands-svg-icons',
+            icons: ['fab'],
+          },
+        ],
+      },
+    ],
   ],
+  pwa: {
+    meta: {
+      name: 'COVID-19 Board',
+      ogSiteName: 'COVID-19 Board',
+    },
+    manifest: {
+      name: 'COVID-19 Board',
+      short_name: 'COVID-19 Board',
+    },
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -64,8 +92,8 @@ export default {
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'https://asia-east2-covid-19-nz-update.cloudfunctions.net/api'
-        : 'http://localhost:5001/covid-19-nz-update/asia-east2/api',
+        ? 'https://asia-east2-covid19board.cloudfunctions.net//api'
+        : 'http://localhost:5001/covid19board/asia-east2/api',
   },
   styleResources: {
     // your settings here
@@ -79,6 +107,6 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {},
+    // extend(config, ctx) { },
   },
 }
