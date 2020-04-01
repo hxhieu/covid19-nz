@@ -48,7 +48,8 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  border-top: 1px dashed $primaryColor;
+  border: 2px dashed orange;
+  z-index: 1000;
 
   .header {
     svg {
@@ -63,6 +64,8 @@
     .el-button {
       font-weight: 700;
       color: $backgroundColor;
+      font-size: 1.25rem;
+      padding: 1rem 2rem;
     }
   }
 }

@@ -50,28 +50,5 @@
       </a>
       if you found an issue or just want to chat!
     </p>
-    <div class="copy">Copyright &copy; {{ now }}</div>
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      now: new Date().getFullYear(),
-    }
-  },
-}
-</script>
-
-<style lang="scss" scoped>
-.copy {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-  font-weight: 700;
-  color: $primaryColor;
-  padding: 10px 0;
-}
-</style>

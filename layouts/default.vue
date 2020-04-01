@@ -18,6 +18,11 @@
     <el-dialog fullscreen :visible.sync="showMenu" title="Menu">
       <NavMenu :items="menuItems" @close="showMenu = false"></NavMenu>
     </el-dialog>
+    <div class="copy">
+      Copyright &copy; {{ now }}
+      <span class="copy-separator">|</span>
+      <nuxt-link to="/disclaimer">Disclaimer</nuxt-link>
+    </div>
   </div>
 </template>
 
@@ -39,6 +44,7 @@ export default {
   },
   data() {
     return {
+      now: new Date().getFullYear(),
       showMenu: false,
       menuItems: [
         {
@@ -87,6 +93,22 @@ body,
   background: $backgroundColor;
   height: 100%;
   overflow: auto;
+
+  .copy {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 700;
+    color: $primaryColor;
+    padding: 3px 0 7px 0;
+    background: $backgroundColor;
+
+    .copy-separator {
+      color: $palette2;
+    }
+  }
 
   h1 {
     font-size: 2rem;
@@ -165,7 +187,7 @@ body,
 
     #main-content {
       max-width: $contentWidth;
-      padding: 0 20px 20px 20px;
+      padding: 0 20px 35px 20px;
       margin: 0 auto;
       @media only screen and (max-width: $breakpoint-md) {
         padding: 5px;
