@@ -219,7 +219,7 @@ export default {
           &.count {
             position: absolute;
             color: salmon;
-            font-size: 6rem;
+            font-size: 4rem;
             line-height: 4rem;
             bottom: 2rem;
             right: 2rem;

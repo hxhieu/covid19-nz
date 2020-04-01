@@ -12,6 +12,9 @@ app.use(
     origin: [
       'http://localhost:8080',
       'https://covid-19-nz-update.firebaseapp.com',
+      'https://covid19board.firebaseapp.com',
+      'https://covid19board.web.app',
+      'https://covid19board.now.sh',
     ],
   })
 )
