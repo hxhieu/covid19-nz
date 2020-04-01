@@ -16,9 +16,9 @@ export const mutations = {
 }
 
 export const actions = {
-  async fetchCases({ commit, state }) {
+  async fetchCases({ commit, state }, forceRefresh) {
     // Don't reload
-    if (state.records && state.records.confirmed.length) return
+    if (!forceRefresh && state.records && state.records.confirmed.length) return
     commit('setBusy', true)
     const records = await this.$axios.$get('/cases')
     commit('setRecords', records)

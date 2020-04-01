@@ -9,6 +9,8 @@
         :tile="tile11"
         :busy="fetchBusy"
         @delete="clearTile(0)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(0)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -17,6 +19,8 @@
         :tile="tile12"
         :busy="fetchBusy"
         @delete="clearTile(1)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(1)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -25,6 +29,8 @@
         :tile="tile21"
         :busy="fetchBusy"
         @delete="clearTile(2)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(2)"
       ></DashboardTile>
       <DashboardTile
         :nav-link="navLink"
@@ -33,6 +39,8 @@
         :tile="tile22"
         :busy="fetchBusy"
         @delete="clearTile(3)"
+        @refresh="fetchCases(true)"
+        @goto="gotoListing(3)"
       ></DashboardTile>
     </div>
   </div>
@@ -106,6 +114,10 @@ export default {
   methods: {
     ...mapActions('Cases', ['fetchCases']),
     ...mapActions('Dashboard', ['clearTile']),
+    gotoListing(index) {
+      const query = this.getTile(index)
+      this.$router.push({ path: '/cases', query })
+    },
   },
 }
 </script>
