@@ -1,10 +1,14 @@
 export const state = () => ({
+  termsAccepted: false,
   tiles: [],
 })
 
 export const mutations = {
   setTile: (state, { index, filters }) => {
     state.tiles.splice(index, 1, filters)
+  },
+  setAcceptTerms: (state, accept) => {
+    state.termsAccepted = accept
   },
 }
 
