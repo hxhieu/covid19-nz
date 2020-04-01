@@ -80,7 +80,12 @@ export default {
       name: 'COVID-19 Board',
       ogSiteName: 'COVID-19 Board',
       ogHost: 'https://covid19board.web.app',
-      ogImage: '/img/overview.png',
+      ogImage: {
+        path: '/img/overview.jpg',
+        type: 'image/jpeg',
+        width: 480,
+        height: 333,
+      },
     },
     manifest: {
       name: 'COVID-19 Board',
