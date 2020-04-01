@@ -1,7 +1,7 @@
 {
   "name": "covid-19-nz-nuxt",
   "description": "NZ COVID-19 cases daily update, data from the Ministry of Health",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "author": "Hugh Hoang &lt;hugh.hoang@gmail.com&gt;",
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",

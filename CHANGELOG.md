@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github_hxhieu///compare/v1.1.0...v1.2.0) (2020-04-01)
+
+
+### Features
+
+* About me page ([#5](https://github_hxhieu//undefined/issues/5)) ([8a9ba70](https://github_hxhieu///commit/8a9ba700d953658b967a2a585d0d6a706b3650df))
+* dark mode ([#7](https://github_hxhieu//undefined/issues/7)) ([e727400](https://github_hxhieu///commit/e7274002bc26bc03f0ec9686d0a78b42afd2c74d))
+* Data credits and attributions ([#4](https://github_hxhieu//undefined/issues/4)) ([88a2355](https://github_hxhieu///commit/88a235541c593f90f05cdcd073d7889c6f14092e))
+* navigation menu ([#6](https://github_hxhieu//undefined/issues/6)) ([a3e829c](https://github_hxhieu///commit/a3e829c0c7645b9ccf85eb28303f641db7ced550))
+* Update copyright and disclaimer footer ([c137a76](https://github_hxhieu///commit/c137a76c513399d336abc752ebc472a44256859d))
+
 ## 1.1.0 (2020-04-01)
 
 
