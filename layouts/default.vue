@@ -8,8 +8,33 @@
       <nuxt-link to="/about"><i class="el-icon-chat-line-round"></i></nuxt-link>
     </h1>
     <nuxt id="main-content" />
+    <Disclaimer
+      v-if="!termsAccepted"
+      @accept="setAcceptTerms(true)"
+    ></Disclaimer>
   </div>
 </template>
+
+<script>
+import { mapState, mapMutations } from 'vuex'
+
+const Disclaimer = () =>
+  import(
+    /* webpackChunkName: 'components-disclaimer' */ '../components/Disclaimer'
+  )
+
+export default {
+  components: {
+    Disclaimer,
+  },
+  computed: {
+    ...mapState('Dashboard', ['termsAccepted']),
+  },
+  methods: {
+    ...mapMutations('Dashboard', ['setAcceptTerms']),
+  },
+}
+</script>
 
 <style lang="scss">
 html,
