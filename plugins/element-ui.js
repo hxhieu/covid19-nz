@@ -77,6 +77,7 @@ const styles = [
   './node_modules/element-ui/packages/theme-chalk/src/option.scss',
   './node_modules/element-ui/packages/theme-chalk/src/dialog.scss',
   './node_modules/element-ui/packages/theme-chalk/src/loading.scss',
+  './node_modules/element-ui/packages/theme-chalk/src/notification.scss',
 ]
 
 export { styles }

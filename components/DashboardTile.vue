@@ -132,7 +132,7 @@ export default {
         i {
           font-size: 6rem;
           color: $primaryColor;
-          opacity: 0.5;
+          opacity: 0;
         }
         .bg {
           position: absolute;

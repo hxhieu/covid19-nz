@@ -50,7 +50,7 @@
       <strong>{{ filtered.length }}</strong>
       cases across New Zealand. Use the filters above to find out more!
     </label>
-    <div v-if="showSummary">
+    <div v-else>
       <CaseActions @save="saveToDashboard"></CaseActions>
       <CaseTable
         v-if="showSummary"

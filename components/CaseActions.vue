@@ -1,31 +1,38 @@
 <template>
   <div>
-    <el-row>
-      <el-col :span="8">
+    <el-row class="action-buttons">
+      <el-col :md="8"></el-col>
+      <el-col :md="8">
         <a href="" class="action-btn save" @click.prevent="showDialog = true">
           <i class="el-icon-star-off"></i>
-          Save
+          Save to Dashboard
         </a>
       </el-col>
-      <el-col :span="8">
-        <a
-          target="_blank"
-          :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`"
-          class="action-btn facebook"
-        >
-          <font-awesome-icon :icon="['fab', 'facebook']"></font-awesome-icon>
-          Facebook
-        </a>
-      </el-col>
-      <el-col :span="8">
-        <a
-          target="_blank"
-          :href="`https://www.twitter.com/share?url=${shareUrl}`"
-          class="action-btn twitter"
-        >
-          <font-awesome-icon :icon="['fab', 'twitter']"></font-awesome-icon>
-          Twitter
-        </a>
+      <el-col :md="8">
+        <el-row>
+          <el-col :span="12">
+            <a
+              target="_blank"
+              :href="`https://www.twitter.com/share?url=${shareUrl}`"
+              class="action-btn twitter"
+            >
+              <font-awesome-icon :icon="['fab', 'twitter']"></font-awesome-icon>
+              Twitter
+            </a>
+          </el-col>
+          <el-col :span="12">
+            <a
+              target="_blank"
+              :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`"
+              class="action-btn facebook"
+            >
+              <font-awesome-icon
+                :icon="['fab', 'facebook']"
+              ></font-awesome-icon>
+              Facebook
+            </a>
+          </el-col>
+        </el-row>
       </el-col>
     </el-row>
     <el-dialog
@@ -73,12 +80,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.action-btn {
-  color: $primaryColor;
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-  padding: 15px;
+.action-buttons {
+  .el-col {
+    text-align: center;
+    padding: 5px;
+    .action-btn {
+      color: $primaryColor;
+      text-align: center;
+      width: 100%;
+    }
+  }
 }
 
 .save-dialog {

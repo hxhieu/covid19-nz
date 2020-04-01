@@ -40,6 +40,7 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex'
+import { Notification } from 'element-ui'
 import fetchCasesPageMixin from '@/mixins/fetch-cases-page'
 
 const DashboardTile = () =>
@@ -72,6 +73,22 @@ export default {
     },
     tile22() {
       return this.tileDetails(3)
+    },
+    isEmpty() {
+      return !this.tile11 && !this.tile12 && !this.tile21 && !this.tile22
+    },
+  },
+  watch: {
+    fetchBusy(val) {
+      if (!val && this.isEmpty) {
+        Notification.info({
+          title: 'Your dashboard is empty!',
+          message:
+            'Let us start by clicking or touching the tiles below for more details',
+          duration: 0,
+          customClass: 'custom-notification centre',
+        })
+      }
     },
   },
   created() {

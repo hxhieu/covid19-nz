@@ -39,6 +39,19 @@ body,
     margin: 10px 0;
   }
 
+  .custom-notification {
+    .el-notification__content {
+      text-align: initial;
+    }
+
+    &.centre {
+      left: 10px;
+      right: 10px;
+      top: 5px !important;
+      width: calc(100% - 20px);
+    }
+  }
+
   .el-dialog__header {
     text-align: center;
 
