@@ -59,22 +59,34 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
-    [
-      'nuxt-fontawesome',
+    'nuxt-fontawesome',
+  ],
+  fontawesome: {
+    imports: [
       {
-        imports: [
-          {
-            set: '@fortawesome/free-solid-svg-icons',
-            icons: ['fas'],
-          },
-          {
-            set: '@fortawesome/free-brands-svg-icons',
-            icons: ['fab'],
-          },
+        set: '@fortawesome/free-solid-svg-icons',
+        component: 'fas',
+        icons: [
+          'faBookmark',
+          'faMapMarkedAlt',
+          'faUser',
+          'faVenusMars',
+          'faCalendarAlt',
+          'faExclamationTriangle',
+          'faExternalLinkAlt',
+          'faTimesCircle',
+          'faThLarge',
+          'faThList',
+          'faQuestionCircle',
         ],
       },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        component: 'fab',
+        icons: ['faFacebookSquare', 'faTwitterSquare'],
+      },
     ],
-  ],
+  },
   pwa: {
     meta: {
       name: 'COVID-19 Board',

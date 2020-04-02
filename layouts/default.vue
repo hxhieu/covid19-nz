@@ -23,6 +23,7 @@
       <span class="copy-separator">|</span>
       <nuxt-link to="/disclaimer">Disclaimer</nuxt-link>
     </div>
+    <FirebaseAnalytics />
   </div>
 </template>
 
@@ -36,11 +37,16 @@ const Disclaimer = () =>
 
 const NavMenu = () =>
   import(/* webpackChunkName: 'components-nav-menu' */ '../components/NavMenu')
+const FirebaseAnalytics = () =>
+  import(
+    /* webpackChunkName: 'components-firebase-analytics' */ '../components/FirebaseAnalytics'
+  )
 
 export default {
   components: {
     Disclaimer,
     NavMenu,
+    FirebaseAnalytics,
   },
   data() {
     return {

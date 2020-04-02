@@ -11,7 +11,7 @@
               @click.prevent="showDialog = true"
             >
               <icon :fa-icon="['fas', 'bookmark']"></icon>
-              Save to Dashboard
+              Add to Dashboard
             </a>
           </el-col>
         </el-row>
@@ -24,7 +24,7 @@
               :href="`https://www.twitter.com/share?url=${shareUrl}`"
               class="action-btn twitter"
             >
-              <font-awesome-icon :icon="['fab', 'twitter']"></font-awesome-icon>
+              <icon :fa-icon="['fab', 'twitter-square']"></icon>
               Twitter
             </a>
           </el-col>
@@ -34,9 +34,7 @@
               :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`"
               class="action-btn facebook"
             >
-              <font-awesome-icon
-                :icon="['fab', 'facebook']"
-              ></font-awesome-icon>
+              <icon :fa-icon="['fab', 'facebook-square']"></icon>
               Facebook
             </a>
           </el-col>
