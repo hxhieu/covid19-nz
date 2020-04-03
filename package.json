@@ -21,6 +21,7 @@
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/style-resources": "^1.0.0",
     "babel-eslint": "^10.0.1",
+    "cross-env": "^7.0.2",
     "eslint": "^6.1.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-nuxt": ">=0.4.2",
@@ -43,9 +44,11 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "deploy": "yarn generate && firebase deploy --only=hosting,functions",
+    "deploy": "firebase use covid19board && yarn generate && firebase deploy --only=hosting,functions",
+    "deploy:staging": "firebase use covid19board-staging && yarn generate:staging && firebase deploy --only=hosting,functions",
     "serve": "nuxt",
-    "generate": "nuxt generate",
+    "generate": "cross-env APP_ENV='' nuxt generate",
+    "generate:staging": "cross-env APP_ENV=staging nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "start": "nuxt start"
   }

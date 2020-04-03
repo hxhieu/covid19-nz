@@ -1,5 +1,7 @@
 import { styles } from './plugins/element-ui'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default {
   mode: 'spa',
   server: {
@@ -109,10 +111,11 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'https://asia-east2-covid19board.cloudfunctions.net//api'
-        : 'http://localhost:5001/covid19board/asia-east2/api',
+    baseURL: isProduction
+      ? `https://asia-east2-covid19board${
+          process.env.APP_ENV ? `-${process.env.APP_ENV}` : ''
+        }.cloudfunctions.net/api`
+      : 'http://localhost:5001/covid19board/asia-east2/api',
   },
   styleResources: {
     // your settings here

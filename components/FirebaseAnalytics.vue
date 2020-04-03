@@ -19,5 +19,21 @@ export default {
       enabled: process.env.NODE_ENV === 'production',
     }
   },
+  mounted() {
+    if (this.enabled) {
+      let retries = 0
+      const firebaseCheck = setInterval(() => {
+        if (window.firebase && window.firebase.analytics) {
+          // Just keep trying, not sure how Nuxt handle this timing...
+          try {
+            window.firebase.analytics()
+            clearInterval(firebaseCheck)
+          } catch {}
+        }
+        retries++
+        if (retries > 60) clearInterval(firebaseCheck)
+      }, 500)
+    }
+  },
 }
 </script>
