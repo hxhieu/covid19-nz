@@ -92,7 +92,7 @@ export default {
   axios: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'https://asia-east2-covid19board.cloudfunctions.net//api'
+        ? 'https://asia-east2-covid19board.cloudfunctions.net/api'
         : 'http://localhost:5001/covid19board/asia-east2/api',
   },
   styleResources: {

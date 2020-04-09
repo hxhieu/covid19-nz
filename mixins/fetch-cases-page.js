@@ -2,7 +2,7 @@ import { mapState } from 'vuex'
 
 export default {
   computed: {
-    ...mapState('Cases', {
+    ...mapState('NzCases', {
       fetchBusy: 'busy',
     }),
   },

@@ -20,7 +20,7 @@ export const actions = {
     // Don't reload
     if (!forceRefresh && state.records && state.records.confirmed.length) return
     commit('setBusy', true)
-    const records = await this.$axios.$get('/cases')
+    const records = await this.$axios.$get('/country/nzl')
     commit('setRecords', records)
     commit('setBusy', false)
   },

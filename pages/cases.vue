@@ -92,7 +92,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Cases', ['allCases', 'filteredCases']),
+    ...mapGetters('NzCases', ['allCases', 'filteredCases']),
     filtered() {
       return this.filteredCases({
         age: this.filterAge,
@@ -184,7 +184,7 @@ export default {
     this.fetchCases()
   },
   methods: {
-    ...mapActions('Cases', ['fetchCases']),
+    ...mapActions('NzCases', ['fetchCases']),
     ...mapMutations('Dashboard', ['setTile']),
     saveToDashboard(index) {
       this.setTile({

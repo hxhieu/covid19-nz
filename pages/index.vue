@@ -68,7 +68,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('Cases', ['filteredCases']),
+    ...mapGetters('NzCases', ['filteredCases']),
     ...mapGetters('Dashboard', ['getTile']),
     tile11() {
       return this.tileDetails(0)
@@ -112,7 +112,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('Cases', ['fetchCases']),
+    ...mapActions('NzCases', ['fetchCases']),
     ...mapActions('Dashboard', ['clearTile']),
     gotoListing(index) {
       const query = this.getTile(index)
