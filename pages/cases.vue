@@ -119,7 +119,7 @@ export default {
           const date2parts = y.split('-')
           const date2 = new Date(date2parts[2], date2parts[1], date2parts[0])
           if (date1 === date2) return 0
-          return date1 < date2 ? 1 : -1
+          return date1 > date2 ? -1 : 1
         })
     },
     showSummary() {

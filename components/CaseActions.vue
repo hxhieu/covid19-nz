@@ -3,10 +3,18 @@
     <el-row class="action-buttons">
       <el-col :md="8"></el-col>
       <el-col :md="8">
-        <a href="" class="action-btn save" @click.prevent="showDialog = true">
-          <i class="el-icon-star-off"></i>
-          Save to Dashboard
-        </a>
+        <el-row>
+          <el-col :span="24">
+            <a
+              href=""
+              class="action-btn save"
+              @click.prevent="showDialog = true"
+            >
+              <icon :fa-icon="['fas', 'bookmark']"></icon>
+              Add to Dashboard
+            </a>
+          </el-col>
+        </el-row>
       </el-col>
       <el-col :md="8">
         <el-row>
@@ -16,7 +24,7 @@
               :href="`https://www.twitter.com/share?url=${shareUrl}`"
               class="action-btn twitter"
             >
-              <font-awesome-icon :icon="['fab', 'twitter']"></font-awesome-icon>
+              <icon :fa-icon="['fab', 'twitter-square']"></icon>
               Twitter
             </a>
           </el-col>
@@ -26,9 +34,7 @@
               :href="`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`"
               class="action-btn facebook"
             >
-              <font-awesome-icon
-                :icon="['fab', 'facebook']"
-              ></font-awesome-icon>
+              <icon :fa-icon="['fab', 'facebook-square']"></icon>
               Facebook
             </a>
           </el-col>
@@ -88,6 +94,17 @@ export default {
       color: $primaryColor;
       text-align: center;
       width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      svg {
+        font-size: 1.25rem;
+        margin: 0 5px;
+      }
+
+      &.save {
+        color: $palette2 !important;
+      }
     }
   }
 }

@@ -1,4 +1,4 @@
-# covid-19-nz-nuxt
+# COVID-19 Board
 
 > NZ COVID-19 cases daily update, data from the Ministry of Health
 

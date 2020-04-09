@@ -6,7 +6,7 @@
         {{ item.text }}
       </a>
     </div>
-    <div class="nav-item">
+    <div class="nav-item hidden-md-and-down">
       <icon :fa-icon="['fas', 'times-circle']"></icon>
       <a href="" @click.prevent="$emit('close')">
         Close
@@ -58,7 +58,6 @@ export default {
     font-size: 1.5em;
     margin: 10px 0;
     svg {
-      font-size: 1.2em !important;
       margin-right: 10px;
     }
     a {

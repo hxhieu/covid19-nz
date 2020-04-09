@@ -66,11 +66,6 @@ export default {
       color: darken($primaryColor, 20);
     }
   }
-  @media only screen and (max-width: $breakpoint-md) {
-    i {
-      font-size: 1.5em;
-    }
-  }
   .el-card__body {
     padding: 8px 16px;
     .age-group {

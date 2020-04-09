@@ -127,7 +127,7 @@ export default {
   padding: 5px;
   position: relative;
 
-  @media only screen and (max-width: $breakpoint-md) {
+  @media only screen and (max-width: $breakpoint-sm) {
     padding: 2px;
   }
 
@@ -152,16 +152,24 @@ export default {
     .content {
       height: 100%;
       .details {
+        @media only screen and (max-width: $breakpoint-sm) and (min-width: $breakpoint-xs) {
+          font-size: 14px;
+          padding: 1em;
+        }
+        @media only screen and (max-width: $breakpoint-xs) {
+          font-size: 12px;
+          padding: 1em;
+        }
         height: 100%;
         position: relative;
-        padding: 1.5rem;
+        padding: 2em;
         background: #f0f0f0;
 
         .tile-action {
           cursor: pointer;
           position: absolute;
           color: $palette4;
-          font-size: 2rem;
+          font-size: 2em;
           opacity: 0.7;
 
           &:hover {
@@ -169,28 +177,28 @@ export default {
           }
 
           &.top {
-            top: 0.15rem;
+            top: 0.15em;
           }
 
           &.bottom {
-            bottom: 0.15rem;
+            bottom: 0.15em;
           }
 
           &.left {
-            left: 0.15rem;
+            left: 0.15em;
           }
 
           &.right {
-            right: 0.15rem;
+            right: 0.15em;
           }
         }
 
         .tile-text {
           font-weight: 700;
-          font-size: 1.5rem;
+          font-size: 1.5em;
 
           svg {
-            width: 2rem;
+            width: 1em;
           }
 
           &.location {
@@ -220,13 +228,13 @@ export default {
           &.count {
             position: absolute;
             color: $palette2;
-            font-size: 4rem;
-            line-height: 4rem;
-            bottom: 2rem;
-            right: 2rem;
+            font-size: 5em;
+            line-height: 1em;
+            bottom: 0.5em;
+            right: 0.3em;
             border-right: 2px solid $palette2;
             border-bottom: 2px solid $palette2;
-            padding: 1rem;
+            padding: 0.1em;
           }
         }
       }

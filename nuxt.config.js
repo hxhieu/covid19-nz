@@ -1,5 +1,7 @@
 import { styles } from './plugins/element-ui'
 
+const isProduction = process.env.NODE_ENV === 'production'
+
 export default {
   mode: 'spa',
   server: {
@@ -59,26 +61,45 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     '@nuxtjs/style-resources',
-    [
-      'nuxt-fontawesome',
+    'nuxt-fontawesome',
+  ],
+  fontawesome: {
+    imports: [
       {
-        imports: [
-          {
-            set: '@fortawesome/free-solid-svg-icons',
-            icons: ['fas'],
-          },
-          {
-            set: '@fortawesome/free-brands-svg-icons',
-            icons: ['fab'],
-          },
+        set: '@fortawesome/free-solid-svg-icons',
+        component: 'fas',
+        icons: [
+          'faBookmark',
+          'faMapMarkedAlt',
+          'faUser',
+          'faVenusMars',
+          'faCalendarAlt',
+          'faExclamationTriangle',
+          'faExternalLinkAlt',
+          'faTimesCircle',
+          'faThLarge',
+          'faThList',
+          'faQuestionCircle',
         ],
       },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        component: 'fab',
+        icons: ['faFacebookSquare', 'faTwitterSquare'],
+      },
     ],
-  ],
+  },
   pwa: {
     meta: {
       name: 'COVID-19 Board',
       ogSiteName: 'COVID-19 Board',
+      ogHost: 'https://covid19board.web.app',
+      ogImage: {
+        path: '/img/overview.jpg',
+        type: 'image/jpeg',
+        width: 480,
+        height: 333,
+      },
     },
     manifest: {
       name: 'COVID-19 Board',
@@ -90,10 +111,11 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'https://asia-east2-covid19board.cloudfunctions.net/api'
-        : 'http://localhost:5001/covid19board/asia-east2/api',
+    baseURL: isProduction
+      ? `https://asia-east2-covid19board${
+          process.env.APP_ENV ? `-${process.env.APP_ENV}` : ''
+        }.cloudfunctions.net/api`
+      : 'http://localhost:5001/covid19board/asia-east2/api',
   },
   styleResources: {
     // your settings here
