@@ -20,6 +20,7 @@ app.use(
 )
 
 // Router
-app.get('/cases', cases.getAllCases)
+app.get('/world', cases.getAllCases)
+app.get('/country/:country?', cases.getCountryDetail)
 
 exports.api = functions.region('asia-east2').https.onRequest(app)

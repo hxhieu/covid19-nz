@@ -1,25 +1,25 @@
-require('../common/firebase-init')
-const functions = require('firebase-functions')
-
-const bucket = require('firebase-admin')
-  .storage()
-  .bucket(functions.config().storage.bucket)
+const getFromFirebaseStorage = require('./getFromFirebase')
 
 const getAllCases = async (req, res) => {
   try {
-    const ref = bucket.file('__latest.NZ.json')
-    const file = (await ref.get())[0]
-    const stream = file.createReadStream()
-    const chunks = []
-    stream.on('data', data => {
-      chunks.push(data.toString())
-    })
-    stream.on('end', () => {
-      res.status(200).send(chunks.join(''))
-    })
-    stream.on('error', err => {
-      res.status(500).send(`Error downloading data file. ${err}`)
-    })
+    const data = await getFromFirebaseStorage(`__latest.json`)
+    res.status(200).send(data)
+  } catch ({ message }) {
+    res.status(500).send(message)
+  }
+}
+
+const getCountryDetail = async (req, res) => {
+  try {
+    const { country } = req.params
+    if (!country)
+      res.status(400).send('Country code ISO-3166 Alpha-3 is required.')
+    else {
+      const data = await getFromFirebaseStorage(
+        `__latest.${country.toUpperCase()}.json`
+      )
+      res.status(200).send(data)
+    }
   } catch ({ message }) {
     res.status(500).send(message)
   }
@@ -27,4 +27,5 @@ const getAllCases = async (req, res) => {
 
 module.exports = {
   getAllCases,
+  getCountryDetail,
 }
