@@ -115,7 +115,7 @@ export default {
       ? `https://asia-east2-covid19board${
           process.env.APP_ENV ? `-${process.env.APP_ENV}` : ''
         }.cloudfunctions.net/api`
-      : 'http://localhost:5001/covid19board/asia-east2/api',
+      : 'http://localhost:5001/covid19board-staging/asia-east2/api',
   },
   styleResources: {
     // your settings here

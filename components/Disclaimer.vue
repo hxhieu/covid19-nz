@@ -70,7 +70,6 @@
       .el-button {
         font-weight: 700;
         color: $backgroundColor;
-        font-size: 1.25rem;
         padding: 1rem 2rem;
       }
     }
